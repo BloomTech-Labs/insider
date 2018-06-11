@@ -22,12 +22,12 @@ server.post('/api/send', (req, res) => {
   client.messages.create({
     to: req.body.recipient,
     from: "+14242864835",
-    body: 'Did you get this?'
+    body: req.body.message
   })
-  .then((message) => console.log(message.sid))
+  .then((message) => console.log("Sent message: '" + message.body + "'"))
   .catch((err) => {
     res.send(err);
   })
 })
 
-server.listen(5000, () => console.log('Example app listening on port 5000!'));
+server.listen(5000, () => console.log('App listening on port 5000!'));

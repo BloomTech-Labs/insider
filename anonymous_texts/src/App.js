@@ -6,12 +6,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipient: ''
+      recipient: '',
+      message: ''
     };
   }
 
   changeInput = (event) => {
     this.setState({recipient: event.target.value});
+  }
+
+  changeMessage = (event) => {
+    this.setState({message: event.target.value});
   }
 
   sendSms = () => {
@@ -21,11 +26,7 @@ class App extends Component {
         Accept: 'application/JSON',
         'Content-Type': 'application/JSON'
       },
-      body: JSON.stringify({recipient: this.state.recipient})
-    })
-    .then(resp => resp.json())
-    .then(resp => {
-      console.log(resp)
+      body: JSON.stringify({recipient: this.state.recipient, message: this.state.message})
     })
   }
 
@@ -36,9 +37,16 @@ class App extends Component {
         <input
           onChange={this.changeInput}
           value={this.state.recipient}
-          placeholder="+12223334444"
+          placeholder="number"
         />
-        <button onClick={this.sendSms}>Send message</button>
+        <br />
+        <input
+          onChange={this.changeMessage}
+          value={this.state.message}
+          placeholder="text" 
+        />
+        <br />
+        <button onClick={this.sendSms}>Send text!</button>
         <p>Don\'t forget your country code, e.g., +1 in the US.</p>
       </div>
     );
