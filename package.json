@@ -1,5 +1,5 @@
 {
-  "name": "Anonymous_texts",
+  "name": "anonymous_texts",
   "version": "0.0.1",
   "main": "server.js",
   "repository": "git@github.com:Lambda-School-Labs/insider.git",
@@ -19,6 +19,10 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
     "mocha": "^5.2.0"
   }
 }
