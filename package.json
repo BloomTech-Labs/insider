@@ -1,6 +1,6 @@
 {
   "name": "Anonymous_texts",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "server.js",
   "repository": "git@github.com:Lambda-School-Labs/insider.git",
   "author": "Peter Gray <peter@petergraycreative.com>",
