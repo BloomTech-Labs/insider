@@ -1,6 +1,17 @@
-require('dotenv').config();
-const express = require('express');
+const mongoose = require('mongoose');
+const server = require('./server');
 
-const server = express();
+const port = 5050;
+mongoose.Promise = global.Promise;
+mongoose.connect(
+  'mongodb://localhost/anonymous',
+  {},
+  (err) => {
+    if (err) throw new Error(err);
+    console.log('DB up and running');
+  },
+);
 
-server.listen(3000, () => console.log('Example app listening on port 3000!'));
+server.listen(port, () => {
+  console.log(`Magic happening on port ${port}`);
+});

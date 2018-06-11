@@ -31,3 +31,27 @@ describe('GET to /api/recent_messages', () => {
     done();
   });
 });
+
+describe('POST to /api/account', () => {
+  it('should return the most recent messages', (done) => {
+    const user = {
+      token: '',
+      accountID: '12345',
+    };
+    chai
+      .request(server)
+      .POST('/api/account')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          console.error(err);
+          done();
+        }
+        expect(res.status).to.equal(200);
+        expect(res.body.username.length).to.be.above(0);
+        expect(res.body.accountID).to.equal('12345');
+        expect(res.body.cc).to.equal('1111');
+      });
+    done();
+  });
+});
