@@ -4,6 +4,7 @@ import axios from 'axios';
 const apiURI = 'http://localhost:5050/api/';
 
 export default class MessageFeed extends Component {
+  // Constructor not needed in React 16
   state = {
     recipient: '',
     message: '',
@@ -23,7 +24,7 @@ export default class MessageFeed extends Component {
         console.error(error);
       });
   };
-
+  // Handles changes for all inputs
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -46,6 +47,7 @@ export default class MessageFeed extends Component {
         <br />
         <button onClick={this.sendSMS}>Send text!</button>
         <p>Don't forget your country code, e.g., +1 in the US.</p>
+        {/* Updates based on Twilio API success */}
         <p>{this.state.sent}</p>
       </div>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { getMessages } from '../functions/functions';
 import Message from './Message';
 
 export default class MessageFeed extends Component {

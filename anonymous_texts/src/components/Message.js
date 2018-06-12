@@ -9,4 +9,5 @@ const Message = (props) => {
   );
 };
 
+// Still need to add propTypes validation
 export default Message;

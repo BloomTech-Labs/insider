@@ -11,6 +11,7 @@ const App = () => {
       <div className="header">
         <h1>Anonymous Texts</h1>
       </div>
+      {/* React Router routes based on current path, some components may need to be repeated because of this. */}
       <Router>
         <div className="">
           <Route path="/" exact component={MessageForm} />
