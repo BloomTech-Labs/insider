@@ -11,7 +11,7 @@ server.use(express.json());
 server.post('/api/send', (req, res) => {
   let SID = process.env.TWILIO_SID;
   let TOKEN = process.env.TWILIO_TOKEN;
-  let SENDER = process.env.TWILIO_SENDER
+  let FROM = process.env.TWILIO_FROM;
 
   if(!SID || !TOKEN) {
     return res.json({message: 'add TWILIO_SID and TWILIO_TOKEN to .env file.'})
@@ -21,7 +21,7 @@ server.post('/api/send', (req, res) => {
 
   client.messages.create({
     to: req.body.recipient,
-    from: "+14242864835",
+    from: FROM,
     body: req.body.message
   })
   .then((message) => console.log("Sent message: '" + message.body + "'"))
