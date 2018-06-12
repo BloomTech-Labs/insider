@@ -7,14 +7,14 @@ const apiRoutes = require('./controllers/routes/api-routes');
 
 const corsOptions = {
   origin: '*',
-  credentials: true
+  credentials: true,
 };
 
 const server = express();
 
 server.use(cors(corsOptions));
 
-server.use('/api',/* isLoggedIn,*/ apiRoutes);
+server.use('/api', /* isLoggedIn,*/ apiRoutes);
 
 // server.use('/', authRoutes);
 
