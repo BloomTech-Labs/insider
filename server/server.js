@@ -1,8 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const apiRoutes = require('./routes/api-routes');
-
-server.use(morgan('combined'));
+const apiRoutes = require('./controllers/routes/api-routes');
 
 // const authRoutes = require('./routes/auth-routes');
 // const isLoggedIn = require('./controllers/isLoggedIn');
