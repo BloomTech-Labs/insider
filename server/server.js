@@ -7,6 +7,9 @@ const cors = require('cors');
 
 server.use(cors())
 server.use(express.json());
+server.use(morgan('combined'));
+
+const models = require('./models/models');
 
 server.post('/api/send', (req, res) => {
   let SID = process.env.TWILIO_SID;
@@ -31,3 +34,4 @@ server.post('/api/send', (req, res) => {
 })
 
 server.listen(5000, () => console.log('App listening on port 5000!'));
+module.exports = server;
