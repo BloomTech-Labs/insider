@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'whatwg-fetch';
+
 import './App.css';
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   sendSms = () => {
-    fetch('http://localhost:5000/api/send', {
+    fetch('http://localhost:5050/api/send', {
       method: 'POST',
       headers: {
         Accept: 'application/JSON',

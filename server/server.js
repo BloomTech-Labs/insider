@@ -16,7 +16,7 @@ const server = express();
 server.use(cors(corsOptions));
 
 // You can add in any routes you want as you import them
-server.use('/api', /* isLoggedIn,*/ apiRoutes);
+server.use('/api', /* isLoggedIn, */ apiRoutes);
 
 // server.use('/', authRoutes);
 
