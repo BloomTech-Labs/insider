@@ -1,18 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import 'whatwg-fetch';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipient: '',
+      message: ''
+    };
+  }
+
+  changeInput = (event) => {
+    this.setState({recipient: event.target.value});
+  }
+
+  changeMessage = (event) => {
+    this.setState({message: event.target.value});
+  }
+
+  sendSms = () => {
+    fetch('http://localhost:5000/api/send', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/JSON',
+        'Content-Type': 'application/JSON'
+      },
+      body: JSON.stringify({recipient: this.state.recipient, message: this.state.message})
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <p>Enter phone number to send SMS to: </p>
+        <input
+          onChange={this.changeInput}
+          value={this.state.recipient}
+          placeholder="number"
+        />
+        <br />
+        <input
+          onChange={this.changeMessage}
+          value={this.state.message}
+          placeholder="text" 
+        />
+        <br />
+        <button onClick={this.sendSms}>Send text!</button>
+        <p>Don\'t forget your country code, e.g., +1 in the US.</p>
       </div>
     );
   }
