@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const server = require('./server');
 
+// Imports server.js and app.js creates a connection containing the routes and middleware
+
 const port = 5050;
 // mongoose.Promise = global.Promise;
 // mongoose.connect(
