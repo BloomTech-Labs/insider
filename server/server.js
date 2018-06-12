@@ -1,37 +1,23 @@
-require('dotenv').config();
 const express = require('express');
-const twilio = require('twilio')
-const server = express();
-const router = express.Router();
 const cors = require('cors');
+const apiRoutes = require('./routes/api-routes');
 
-server.use(cors())
-server.use(express.json());
 server.use(morgan('combined'));
 
-const models = require('./models/models');
+// const authRoutes = require('./routes/auth-routes');
+// const isLoggedIn = require('./controllers/isLoggedIn');
 
-server.post('/api/send', (req, res) => {
-  let SID = process.env.TWILIO_SID;
-  let TOKEN = process.env.TWILIO_TOKEN;
-  let FROM = process.env.TWILIO_FROM;
+const corsOptions = {
+  origin: '*',
+  credentials: true
+};
 
-  if(!SID || !TOKEN) {
-    return res.json({message: 'add TWILIO_SID and TWILIO_TOKEN to .env file.'})
-  }
+const server = express();
 
-  const client = new twilio(SID, TOKEN)
+server.use(cors(corsOptions));
 
-  client.messages.create({
-    to: req.body.recipient,
-    from: FROM,
-    body: req.body.message
-  })
-  .then((message) => console.log("Sent message: '" + message.body + "'"))
-  .catch((err) => {
-    res.send(err);
-  })
-})
+server.use('/api',/* isLoggedIn,*/ apiRoutes);
 
-server.listen(5000, () => console.log('App listening on port 5000!'));
+// server.use('/', authRoutes);
+
 module.exports = server;
