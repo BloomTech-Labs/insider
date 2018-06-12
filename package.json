@@ -2,7 +2,9 @@
   "name": "anonymous_texts",
   "version": "0.0.1",
   "standard": {
-    "env": [ "mocha" ]
+    "env": [
+      "mocha"
+    ]
   },
   "main": "server.js",
   "repository": "git@github.com:Lambda-School-Labs/insider.git",
