@@ -7,12 +7,15 @@
     ]
   },
   "main": "server.js",
+  "engines": {
+    "node": "10.1.0",
+    "npm": "6.1.0"
+  },
   "repository": "git@github.com:Lambda-School-Labs/insider.git",
-  "author": "Peter Gray <peter@petergraycreative.com>",
+  "author": "Peter Gray & Richard Reis & Anthony Catalfo & Igor Yermak",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server/app.js",
-    "test": "mocha ./server/tests/*.test.js"
+    "start": "node ./server/app.js"
   },
   "dependencies": {
     "chai": "^4.1.2",
