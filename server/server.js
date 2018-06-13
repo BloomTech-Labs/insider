@@ -11,13 +11,13 @@ const corsOptions = {
   credentials: true,
 };
 
-const app = express();
+const server = express();
 
-app.use(cors(corsOptions));
+server.use(cors(corsOptions));
 
 // You can add in any routes you want as you import them
-app.use('/api', /* isLoggedIn, */ apiRoutes);
+server.use('/api', /* isLoggedIn, */ apiRoutes);
 
 // server.use('/', authRoutes);
 
-module.exports = app;
+module.exports = server;
