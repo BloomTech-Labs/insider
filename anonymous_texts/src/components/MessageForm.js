@@ -8,7 +8,6 @@ export default class MessageFeed extends Component {
   state = { // eslint-disable-line no-named-as-default
     recipient: '',
     message: '',
-    sent: '',
   };
 
   // Handles changes for all inputs
@@ -29,7 +28,6 @@ export default class MessageFeed extends Component {
         <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
           <Checkout message={this.state.message} recipient={this.state.recipient}/>
         </StripeProvider>
-        <button onClick={this.sendSMS}>Send text!</button>
         <p>Don't forget your country code, e.g., +1 in the US.</p>
         {/* Updates based on Twilio API success */}
         <p>{this.state.sent}</p>
