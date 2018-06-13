@@ -1,29 +1,16 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { StripeProvider } from 'react-stripe-elements';
 
-const apiURI = 'http://localhost:5050/api/';
+import Checkout from './stripe/Elements';
 
 export default class MessageFeed extends Component {
   // Constructor not needed in React 16
-  state = {
+  state = { // eslint-disable-line no-named-as-default
     recipient: '',
     message: '',
     sent: '',
   };
 
-  sendSMS = (formData) => {
-    const send = 'send';
-    const { message, recipient } = this.state;
-    axios
-      .post(apiURI + send, { message, recipient } )
-      .then((res) => {
-        this.setState({ sent: "Thanks for using Anonymous Messages" });
-      })
-      .catch(error => {
-        this.setState({ sent: "Please try Again, your message did not go through." })
-        console.error(error);
-      });
-  };
   // Handles changes for all inputs
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -38,13 +25,10 @@ export default class MessageFeed extends Component {
           onChange={this.handleInput}
           placeholder="number"
         />
-        <br />
-        <input
-          name="message"
-          onChange={this.handleInput}
-          placeholder="text"
-        />
-        <br />
+        <input name="message" onChange={this.handleInput} placeholder="text" />
+        <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
+          <Checkout message={this.state.message} recipient={this.state.recipient}/>
+        </StripeProvider>
         <button onClick={this.sendSMS}>Send text!</button>
         <p>Don't forget your country code, e.g., +1 in the US.</p>
         {/* Updates based on Twilio API success */}
