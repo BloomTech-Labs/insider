@@ -3,8 +3,6 @@ const express = require('express');
 const path = require('path');
 const app = require('./server');
 
-const app = express();
-
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
 // mongoose.Promise = global.Promise;
