@@ -15,7 +15,12 @@ class _CardForm extends React.Component {
     // console.log(message)
     this.props.stripe.createToken().then(({ token }) => {
       axios
-        .post(apiURI + send, { message, recipient, token })
+        .post(apiURI + send,
+          {
+          message,
+          recipient,
+          token 
+         })
         .then((res) => {
           this.setState({ sent: 'Thanks for using Anonymous Messages' });
         })
