@@ -11,10 +11,11 @@ class _CardForm extends React.Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
     // Creates Stripe token
+    const { message, recipient } = this.props
+    // console.log(message)
     this.props.stripe.createToken().then(({ token }) => {
-
       axios
-        .post(apiURI + send, { token })
+        .post(apiURI + send, { message, recipient, token })
         .then((res) => {
           this.setState({ sent: 'Thanks for using Anonymous Messages' });
         })

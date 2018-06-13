@@ -7,7 +7,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <Elements>
-        <CardForm props={this.props}/>
+        <CardForm message={this.props}/>
       </Elements>
     );
   }
