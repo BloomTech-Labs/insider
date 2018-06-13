@@ -14,16 +14,16 @@ server.post('/send', (req, res) => {
   const SID = process.env.TWILIO_SID;
   const TOKEN = process.env.TWILIO_TOKEN;
   const FROM = process.env.TWILIO_FROM;
-
+  
   if (!SID || !TOKEN) {
     return res.json({
       message: 'add TWILIO_SID and TWILIO_TOKEN to .env file.',
     });
   }
-
+  
   const client = new Twilio(SID, TOKEN);
-  const { message, recipient } =  req.body;
-  console.log(req.body);
+  const { message, recipient } =  req.body.message;
+
   client.messages
     .create({
       body: message,
