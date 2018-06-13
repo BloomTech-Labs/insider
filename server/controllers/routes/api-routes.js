@@ -21,8 +21,6 @@ server.post('/send', (req, res) => {
     });
   }
   
-  
-  
   const client = new Twilio(SID, TOKEN);
   const { message, recipient } =  req.body.message;
 
@@ -39,6 +37,6 @@ server.post('/send', (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-});
-
+ });
+  
 module.exports = server;
