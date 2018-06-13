@@ -1,10 +1,13 @@
-const mongoose = require('mongoose');
-const server = require('./server');
+require('dotenv').config();
+// const mongoose = require('mongoose');
+const app = require('./server');
 
-const port = 5050;
+// Imports server.js and app.js creates a connection containing the routes and middleware
+
+const port = process.env.PORT || 5050;
 // mongoose.Promise = global.Promise;
 // mongoose.connect(
-//   'mongodb://localhost/anonymous',
+//   process.env.URI,
 //   {},
 //   (err) => {
 //     if (err) throw new Error(err);
@@ -12,6 +15,7 @@ const port = 5050;
 //   },
 // );
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Magic happening on port ${port}`);
 });
+module.exports = app

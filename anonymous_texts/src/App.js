@@ -1,56 +1,29 @@
-import React, { Component } from 'react';
-import 'whatwg-fetch';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import MessageForm from './components/MessageForm';
+import MessageFeed from './components/MessageFeed';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      recipient: '',
-      message: ''
-    };
-  }
-
-  changeInput = (event) => {
-    this.setState({recipient: event.target.value});
-  }
-
-  changeMessage = (event) => {
-    this.setState({message: event.target.value});
-  }
-
-  sendSms = () => {
-    fetch('http://localhost:5000/api/send', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/JSON',
-        'Content-Type': 'application/JSON'
-      },
-      body: JSON.stringify({recipient: this.state.recipient, message: this.state.message})
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        <p>Enter phone number to send SMS to: </p>
-        <input
-          onChange={this.changeInput}
-          value={this.state.recipient}
-          placeholder="number"
-        />
-        <br />
-        <input
-          onChange={this.changeMessage}
-          value={this.state.message}
-          placeholder="text" 
-        />
-        <br />
-        <button onClick={this.sendSms}>Send text!</button>
-        <p>Don\'t forget your country code, e.g., +1 in the US.</p>
+const App = () => {
+  return (
+    <div className="container">
+      <div className="header">
+        <h1>Anonymous Texts</h1>
       </div>
-    );
-  }
-}
+      {/* React Router routes based on current path, some components may need to be repeated because of this. */}
+      <Router>
+        <div className="">
+          <Route path="/" exact component={MessageForm} />
+          <Route path="/" exact component={MessageFeed} />
+          {/* <Route path="/account" exact component={Acount} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignUpForm} />
+        <Route path="/change-password" component={ChangePassword} /> */}
+        </div>
+      </Router>
+    </div>
+  );
+};
 
 export default App;
