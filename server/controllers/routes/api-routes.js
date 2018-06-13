@@ -15,23 +15,25 @@ server.post('/send', (req, res) => {
   const TOKEN = process.env.TWILIO_TOKEN;
   const FROM = process.env.TWILIO_FROM;
 
+  console.log(req.body);
+
   if (!SID || !TOKEN) {
     return res.json({
       message: 'add TWILIO_SID and TWILIO_TOKEN to .env file.',
     });
   }
 
-  const client = new Twilio(SID, TOKEN);
-  client.messages
-    .create({
-      to: req.body.recipient,
-      from: FROM,
-      body: req.body.message,
-    })
-    .then(message => res.status(200).json('Sent message:', message.body))
-    .catch((err) => {
-      res.send(err);
-    });
+  // const client = new Twilio(SID, TOKEN);
+  // client.messages
+  //   .create({
+  //     to: req.body.recipient,
+  //     from: FROM,
+  //     body: req.body.message,
+  //   })
+  //   .then(message => res.status(200).json('Sent message:', message.body))
+  //   .catch((err) => {
+  //     res.send(err);
+  //   });
 });
 
 module.exports = server;
