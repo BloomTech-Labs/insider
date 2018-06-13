@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Message from './Message';
 
 export default class MessageFeed extends Component {
-  state = {
+  state = { // eslint-disable-line no-named-as-default
     messages: [
       {
         timestamp: '01100',
