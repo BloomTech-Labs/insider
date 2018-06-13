@@ -22,16 +22,21 @@ server.post('/send', (req, res) => {
   }
 
   const client = new Twilio(SID, TOKEN);
+  const { message, recipient } =  req.body;
+  console.log(req.body);
   client.messages
     .create({
-      to: req.body.recipient,
+      body: message,
+      to: recipient,
       from: FROM,
-      body: req.body.message,
     })
-    .then(message => res.status(200).json('Sent message:', message.body))
+    .then(message =>  {
+      console.log("reached")
+      res.status(200).json('Sent message:', message.body)
+    })
     .catch((err) => {
       res.send(err);
     });
-});
-
+ });
+  
 module.exports = server;

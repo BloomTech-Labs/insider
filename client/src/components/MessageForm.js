@@ -11,7 +11,8 @@ export default class MessageFeed extends Component {
     sent: '',
   };
 
-  sendSMS = (formData) => {
+  sendSMS = () => {
+    console.log(this.state);
     const send = 'send';
     const { message, recipient } = this.state;
     axios
