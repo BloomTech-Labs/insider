@@ -15,8 +15,9 @@
   "author": "Peter Gray & Richard Reis & Anthony Catalfo & Igor Yermak",
   "license": "MIT",
   "scripts": {
-    "start": "node ./server/app.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "nodemon ./server/app.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "test": "mocha ./server/tests/*.test.js"
   },
   "dependencies": {
     "chai": "^4.1.2",
