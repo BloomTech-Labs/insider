@@ -1,10 +1,8 @@
 require('dotenv').config();
-// const mongoose = require('mongoose');
 const app = require('./server');
 
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
-const port = process.env.PORT || 5050;
 // mongoose.Promise = global.Promise;
 // mongoose.connect(
 //   process.env.URI,
@@ -15,7 +13,10 @@ const port = process.env.PORT || 5050;
 //   },
 // );
 
-app.listen(port, () => {
-  console.log(`Magic happening on port ${port}`);
+const PORT = process.env.PORT || 5050;
+
+app.listen(PORT, () => {
+  console.log(`Magic happening on port ${PORT}`);
 });
-module.exports = app
+
+module.exports = app;
