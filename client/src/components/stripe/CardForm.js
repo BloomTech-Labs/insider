@@ -3,7 +3,7 @@ import { injectStripe } from 'react-stripe-elements';
 import { CardElement } from 'react-stripe-elements';
 import axios from 'axios';
 
-const apiURI = 'http://localhost:5050/api/';
+const apiURI = 'https://anonymous-texts.herokuapp.com/api/';
 const send = 'send';
 
 class _CardForm extends React.Component {
