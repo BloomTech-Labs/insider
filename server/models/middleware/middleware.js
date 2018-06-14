@@ -8,7 +8,7 @@ const {
 const STATUS_USER_ERROR = 422;
 
 const envCheck = (req, res, next) => {
-  if (TWILIO_SID || TWILIO_TOKEN || TWILIO_FROM || STRIPE_KEY) {
+  if (TWILIO_SID && TWILIO_TOKEN && TWILIO_FROM && STRIPE_KEY) {
     next();
   } else {
     return res.status(STATUS_USER_ERROR).json({
