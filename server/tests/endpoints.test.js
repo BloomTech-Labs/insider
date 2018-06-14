@@ -1,10 +1,9 @@
 // const mongoose = require('mongoose');
-
-require('dotenv').config();
 const chai = require('chai');
 const chaihttp = require('chai-http');
 const app = require('../app');
 
+const { TWILIO_DEST } = process.env;
 const { expect } = chai;
 // const sinon = require('sinon');
 chai.use(chaihttp);
@@ -14,9 +13,11 @@ describe('App', () => {
     // Stripe elements will send a token, destination phone #, and a message
     it('should send a message to the recipient', (done) => {
       const message = {
-        // token: 'stripe token',
-        recipient: process.env.TWILIO_DEST,
-        message: 'GET to /api/send Test Passed',
+        token: 'tok_visa',
+        message: {
+          message: 'Hello',
+          recipient: TWILIO_DEST,
+        },
       };
       chai
         .request(app)
@@ -24,20 +25,21 @@ describe('App', () => {
         .send(message)
         .end((err, res) => {
           if (err) {
-            console.error(err);
             done();
           }
           expect(res.status).to.equal(200);
-          expect(res.body).to.contain('success');
+          expect(res.body).to.have.property('success');
         });
       done();
     });
     // If token fails to get created
-    it('should fail to send a message', (done) => {
+    it('should fail to send a message without a recipient', (done) => {
       const message = {
-        // token: 'stripe token',
-        recipient: '',
-        message: 'Hello',
+        token: 'tok_visa',
+        message: {
+          recipient: '',
+          message: 'Hello',
+        },
       };
       chai
         .request(app)
@@ -45,11 +47,52 @@ describe('App', () => {
         .send(message)
         .end((err, res) => {
           if (err) {
-            console.error(err);
             done();
           }
           expect(res.status).to.equal(500);
-          expect(res.body).to.contain('success');
+          expect(res.body).to.have.property('error');
+        });
+      done();
+    });
+    it('should fail to send a message without a stripe token', (done) => {
+      const message = {
+        token: '',
+        message: {
+          recipient: TWILIO_DEST,
+          message: 'Hello',
+        },
+      };
+      chai
+        .request(app)
+        .post('/api/send')
+        .send(message)
+        .end((err, res) => {
+          if (err) {
+            done();
+          }
+          expect(res.status).to.equal(500);
+          expect(res.body).to.have.property('error');
+        });
+      done();
+    });
+    it('should fail to send a message without a message', (done) => {
+      const message = {
+        token: 'tok_visa',
+        message: {
+          recipient: TWILIO_DEST,
+          message: '',
+        },
+      };
+      chai
+        .request(app)
+        .post('/api/send')
+        .send(message)
+        .end((err, res) => {
+          if (err) {
+            done();
+          }
+          expect(res.status).to.equal(500);
+          expect(res.body).to.have.property('error');
         });
       done();
     });
