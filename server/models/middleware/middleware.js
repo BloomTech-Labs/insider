@@ -11,7 +11,7 @@ const envCheck = (req, res, next) => {
   if (TWILIO_SID || TWILIO_TOKEN || TWILIO_FROM || STRIPE_KEY) {
     next();
   } else {
-    return res.status(STATUS_USER_ERROR).send({
+    return res.status(STATUS_USER_ERROR).json({
       error: 'Please add SID, Token, and From variable to your .env file.',
     });
   }
