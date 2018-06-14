@@ -19,10 +19,11 @@ class _CardForm extends React.Component {
           {
           message,
           recipient,
-          token 
+          token: token.id
          })
         .then((res) => {
-          this.setState({ sent: 'Thanks for using Anonymous Messages' });
+          console.log(res)
+          this.setState({ sent: res.data.success });
         })
         .catch((error) => {
           this.setState({
