@@ -3,7 +3,7 @@ import { injectStripe } from 'react-stripe-elements';
 import { CardElement } from 'react-stripe-elements';
 import axios from 'axios';
 
-const apiURI = process.env.NODE_ENV === "production"? "https://limitless-refuge-43765.herokuapp.com/api" : "http://localhost:5050/api";
+const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/api/' : 'https://limitless-refuge-43765.herokuapp.com/api/';
 const send = 'send';
 
 class _CardForm extends React.Component {
