@@ -5,7 +5,7 @@ import Checkout from './stripe/Elements';
 
 export default class MessageFeed extends Component {
   // Constructor not needed in React 16
-  state = { // eslint-disable-line no-named-as-default
+  state = { // eslint-disable-line
     recipient: '',
     message: '',
   };
