@@ -26,7 +26,7 @@ export default class MessageFeed extends Component {
         {this.state.messages.map((message) => {
           return (
             <Message
-              title={message.dateCreated}
+              time={message.dateCreated}
               body={message.body}
               key={message.sid}
             />

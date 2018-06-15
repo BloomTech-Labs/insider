@@ -1,9 +1,14 @@
 import React from 'react';
 
-const Message = (props) => {
+// Flow type checking
+type Props = {
+  time: string,
+  body: string
+};
+const Message = (props: Props) => {
   return (
     <div className="message">
-      <h4>{props.title}</h4>
+      <h4>{props.time}</h4>
       <p>{props.body}</p>
     </div>
   );
