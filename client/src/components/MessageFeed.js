@@ -4,8 +4,10 @@ import axios from 'axios';
 
 const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/api/' : 'https://limitless-refuge-43765.herokuapp.com/api/';
 const messages = 'recent-messages';
-
-export default class MessageFeed extends Component {
+type State = {
+  messages: Array<mixed>
+}
+export default class MessageFeed extends Component<State> {
   state = { // eslint-disable-line no-named-as-default
     messages: []
   };
