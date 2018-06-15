@@ -9,6 +9,8 @@ const send = 'send';
 class _CardForm extends React.Component {
 
   handleSubmit = (ev) => {
+    this.props.state.updateLoadingState(true)
+    // this.props.updateLoadingState(true)
     ev.preventDefault();
     // Creates Stripe token
     const { message, recipient } = this.props
@@ -24,12 +26,14 @@ class _CardForm extends React.Component {
         .then((res) => {
           console.log(res)
           this.setState({ sent: res.data.success });
+          this.props.state.updateLoadingState(false)
         })
         .catch((error) => {
           this.setState({
-            sent: 'Please try Again, your message did not go through.',
+            sent: 'Please try again, your message did not go through.',
           });
           console.error(error);
+          this.props.state.updateLoadingState(false)
         });
     });
     // Extracts out message from props

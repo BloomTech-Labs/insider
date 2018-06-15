@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-// All routes located here
+
 const apiRoutes = require('./controllers/routes/api-routes');
 const { envCheck } = require('./models/middleware/middleware');
 // const authRoutes = require('./routes/auth-routes');

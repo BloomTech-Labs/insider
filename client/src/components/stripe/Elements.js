@@ -1,16 +1,13 @@
 import React from 'react';
-import {Elements} from 'react-stripe-elements';
+import { Elements } from 'react-stripe-elements';
 
 import CardForm from './CardForm';
 
-class Checkout extends React.Component {
-  render() {
-    return (
-      <Elements>
-        <CardForm message={this.props}/>
-      </Elements>
-    );
-  }
-}
-
+const Checkout = (props) => {
+  return (
+    <Elements>
+      <CardForm state={props} />
+    </Elements>
+  );
+};
 export default Checkout;
