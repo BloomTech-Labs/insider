@@ -26,7 +26,7 @@ export default class MessageFeed extends Component {
         />
         <input name="message" onChange={this.handleInput} placeholder="text" />
         <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
-          <Checkout message={this.state.message} recipient={this.state.recipient}/>
+          <Checkout message={this.state.message} recipient={this.state.recipient} updateLoadingState={this.props.updateLoadingState}/>
         </StripeProvider>
         <p>Don't forget your country code, e.g., +1 in the US.</p>
         {/* Updates based on Twilio API success */}
