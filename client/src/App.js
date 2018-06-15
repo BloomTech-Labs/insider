@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import MessageForm from './components/MessageForm.js';
-import MessageFeed from './components/MessageFeed.js';
+import MessageForm from './components/MessageForm';
+import MessageFeed from './components/MessageFeed';
 import './App.css';
 
 const App = () => {

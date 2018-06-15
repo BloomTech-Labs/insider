@@ -98,28 +98,25 @@ describe('App', () => {
     });
   });
 
-  // describe('get to /api/recent_messages', () => {
-  //   it('should return the most recent messages', (done) => {
-  //     chai
-  //       .request(app)
-  //       .get('/api/recent_messages')
-  //       .end((err, res) => {
-  //         if (err) {
-  //           console.error(err);
-  //           done();
-  //         }
-  //         expect(res.status).to.equal(200);
-  //         expect(res.body.length).to.be.above(0);
-  //         expect(res.body).to.be.an.instanceof(Array);
-  //         res.body.forEach((message) => {
-  //           expect(message).to.have.property('timestamp');
-  //           expect(message).to.have.property('message');
-  //           // Add more expects here
-  //         });
-  //       });
-  //     done();
-  //   });
-  // });
+  describe('get to /api/recent-messages', () => {
+    it('should return the most recent messages', (done) => {
+      chai
+        .request(app)
+        .get('/api/recent_messages')
+        .end((err, res) => {
+          if (err) {
+            console.error(err);
+            done();
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.be.above(0);
+          expect(res.body).to.be.an.instanceof(Array);
+          expect(res.body[0]).to.have.property('dateCreated');
+          expect(res.body[0]).to.have.property('body');
+        });
+      done();
+    });
+  });
 
   // // Requests account information from API
   // describe('post to /api/account', () => {

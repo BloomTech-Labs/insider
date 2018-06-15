@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import Message from './Message';
+import axios from 'axios';
+
+const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/api/' : 'https://limitless-refuge-43765.herokuapp.com/api/';
+const messages = 'recent-messages';
 
 export default class MessageFeed extends Component {
   state = { // eslint-disable-line no-named-as-default
-    messages: [
-      {
-        timestamp: '01100',
-        body: 'This is a recent message.',
-        id: 'uuid',
-      },
-    ],
+    messages: []
   };
+  getMessages = () => {
+    axios.get(apiURI + messages)
+    .then(({ data }) => {
+      this.setState({ messages: data })
+    }).catch(err => console.log(err))
+  }
 
   componentDidMount() {
-    // this.setState({ messages: getMessages() });
+   this.getMessages();
   }
 
   render() {
@@ -22,9 +26,9 @@ export default class MessageFeed extends Component {
         {this.state.messages.map((message) => {
           return (
             <Message
-              title={message.timestamp}
+              title={message.dateCreated}
               body={message.body}
-              key={message.id}
+              key={message.sid}
             />
           );
         })}
