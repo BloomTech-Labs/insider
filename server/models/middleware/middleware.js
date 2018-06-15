@@ -1,8 +1,13 @@
-const { TWILIO_FROM, STRIPE_KEY, TWILIO_TOKEN, TWILIO_SID } = process.env;
+const {
+  TWILIO_FROM,
+  STRIPE_KEY,
+  TWILIO_TOKEN,
+  TWILIO_SID,
+} = process.env;
 
 const STATUS_USER_ERROR = 422;
 
-const envCheck = (req, res, next) => {
+const envCheck = (req, res, next) => { // eslint-disable-line 
   if (
     TWILIO_SID !== undefined &&
     TWILIO_TOKEN !== undefined &&
@@ -19,7 +24,7 @@ const envCheck = (req, res, next) => {
 };
 
 // May be used still, but will need to be moved to a different file as it doesn't work as middleware
-const inputCheck = (req, res, next) => {
+const inputCheck = (req, res, next) => { // eslint-disable-line 
   const { token } = req.body;
   const { message, recipient } = req.body.message;
   if (message !== undefined && recipient !== undefined) {

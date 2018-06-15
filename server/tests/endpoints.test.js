@@ -1,3 +1,4 @@
+/* eslint-disable */
 // const mongoose = require('mongoose');
 const chai = require('chai');
 const chaihttp = require('chai-http');
