@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Message from './Message';
 import axios from 'axios';
 
-const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/api/' : 'https://anonymous-texts.herokuapp.com/api/';
+const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/api/' : 'https://limitless-refuge-43765.herokuapp.com/api/';
 const messages = 'recent-messages';
 
 export default class MessageFeed extends Component {
