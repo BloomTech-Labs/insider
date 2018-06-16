@@ -18,7 +18,7 @@ const { stripeAuth, sendSMS } = require('../../models/models');
 
 server.post('/send', (req, res) => {
   const { token } = req.body;
-  const { message, recipient } = req.body.message;
+  const { message, recipient } = req.body;
 
   stripeAuth(token)
     .then(() => sendSMS(message, recipient))
