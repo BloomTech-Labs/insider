@@ -7,13 +7,16 @@ const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/a
 const send = 'send';
 
 class _CardForm extends React.Component {
-
+  state = {
+    message: ''
+  }
   handleSubmit = (ev) => {
     this.props.state.updateLoadingState(true)
     // this.props.updateLoadingState(true)
     ev.preventDefault();
     // Creates Stripe token
-    const { message, recipient } = this.props
+    const { message, recipient } = this.props.state
+    console.log(message, recipient)
     // console.log(message)
     this.props.stripe.createToken().then(({ token }) => {
       axios
@@ -25,12 +28,12 @@ class _CardForm extends React.Component {
          })
         .then((res) => {
           console.log(res)
-          this.setState({ sent: res.data.success });
+          this.setState({ message: res.data.success });
           this.props.state.updateLoadingState(false)
         })
         .catch((error) => {
           this.setState({
-            sent: 'Please try again, your message did not go through.',
+            message: 'Please try again, your message did not go through.',
           });
           console.error(error);
           this.props.state.updateLoadingState(false)

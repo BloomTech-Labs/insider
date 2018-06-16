@@ -17,7 +17,7 @@ const app = require('./server');
 // );
 
 // Serve static files from the React app
-if (process.env.DEV === undefined) {
+if (process.env.DEV !== 'development') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 
   // The "catchall" handler: for any request that doesn't
