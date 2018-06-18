@@ -3,38 +3,70 @@ import { injectStripe } from 'react-stripe-elements';
 import { CardElement } from 'react-stripe-elements';
 import axios from 'axios';
 
-const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/api/' : 'https://limitless-refuge-43765.herokuapp.com/api/';
+const apiURI =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5050/api/'
+    : 'https://limitless-refuge-43765.herokuapp.com/api/';
 const send = 'send';
 
 class _CardForm extends React.Component {
-  handleSubmit = (ev) => {
-    this.props.state.updateLoadingState(true)
-    // this.props.updateLoadingState(true)
+  state = {
+    incomplete: false,
+  };
+  handleSubmit = ev => {
+    // this.props.update'loading'State(true)
     ev.preventDefault();
     // Creates Stripe token
-    const { message, recipient } = this.props.state
-    console.log(message, recipient)
-    // console.log(message)
+    const { message, recipient } = this.props.state;
+    // console.log(message, recipient)
     this.props.stripe.createToken().then(({ token }) => {
-      axios
-        .post(apiURI + send,
-          {
-          message,
-          recipient,
-          token: token.id
-         })
-        .then((res) => {
-          console.log(res)
-          this.setState({ message: res.data.success });
-          this.props.state.updateLoadingState(false)
-        })
-        .catch((error) => {
-          this.setState({
-            message: 'Please try again, your message did not go through.',
+      
+      this.props.state.updateParentState('loading', true);
+
+      if (token === undefined) {
+        this.setState({ incomplete: true });
+
+        this.props.state.updateParentState('loading', false);
+        this.props.state.updateParentState('error', true);
+        setTimeout(() => {
+          this.props.state.updateParentState('error', false);
+        }, 1500);
+
+      } else {
+        this.setState({ incomplete: false });
+
+        this.props.state.updateParentState('loading', true);
+        this.props.state.updateParentState('error', false);
+
+        axios
+          .post(apiURI + send, {
+            message,
+            recipient,
+            token: token.id,
+          })
+          .then(res => {
+            this.setState({ message: res.data.success });
+
+            this.props.state.updateParentState('loading', false);
+            this.props.state.updateParentState('confirmed', true);
+            setTimeout(() => {
+              this.props.state.updateParentState('confirmed', false);
+            }, 1000);
+          })
+          .catch(error => {
+            this.setState({
+              message: 'Please try again, your message did not go through.',
+            });
+            console.error(error);
+
+            this.props.state.updateParentState('loading', false);
+            this.props.state.updateParentState('error', true);
+            setTimeout(() => {
+              console.log('props', this.props);
+              this.props.state.updateParentState('error', false);
+            }, 3000);
           });
-          console.error(error);
-          this.props.state.updateLoadingState(false)
-        });
+      }
     });
     // Extracts out message from props
     // console.log(message, recipient, token)
