@@ -7,9 +7,6 @@ const apiURI = process.env.NODE_ENV === 'development' ? 'http://localhost:5050/a
 const send = 'send';
 
 class _CardForm extends React.Component {
-  state = {
-    message: ''
-  }
   handleSubmit = (ev) => {
     this.props.state.updateLoadingState(true)
     // this.props.updateLoadingState(true)
