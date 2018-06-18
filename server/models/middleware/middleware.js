@@ -8,6 +8,7 @@ const {
 const STATUS_USER_ERROR = 422;
 
 const envCheck = (req, res, next) => { // eslint-disable-line 
+  console.log(TWILIO_FROM,TWILIO_SID,TWILIO_TOKEN,STRIPE_KEY)
   if (
     TWILIO_SID !== undefined &&
     TWILIO_TOKEN !== undefined &&
