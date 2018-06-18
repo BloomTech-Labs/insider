@@ -10,11 +10,13 @@ class App extends Component {
   // eslint-disable-line arrow-body-style
   state = {
     loading: false,
+    error: false,
+    confirmed: false
   };
 
-  updateLoadingState = loadingState => {
+  updateParentState = ( attribute, inputState) => {
     this.setState({
-      loading: loadingState,
+      [ attribute ]: inputState,
     });
   };
 
@@ -24,9 +26,7 @@ class App extends Component {
         <div className="header">
           <h1>Anonymous Texts</h1>
         </div>
-        <div>
-        {this.state.loading && <Loading />}
-        </div>
+        <Loading state={this.state}/>
         {/* React Router routes based on current path, some
       components may need to be repeated because of this. */}
         <Router>
@@ -34,7 +34,7 @@ class App extends Component {
             <Route
               path="/"
               exact
-              render={(props) => <MessageForm {...props} updateLoadingState={this.updateLoadingState} />}
+              render={(props) => <MessageForm {...props} updateParentState={this.updateParentState} loadingState={this.state}/>}
             />
             <Route path="/" exact component={MessageFeed} />
             {/* <Route path="/account" exact component={Acount} />
