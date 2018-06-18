@@ -10,10 +10,9 @@ const apiURI =
 const send = 'send';
 
 class _CardForm extends React.Component {
-  state = {
-    incomplete: false,
-  };
+
   handleSubmit = ev => {
+    const { updateParentState } = this.props.state
     // this.props.update'loading'State(true)
     ev.preventDefault();
     // Creates Stripe token
@@ -21,22 +20,19 @@ class _CardForm extends React.Component {
     // console.log(message, recipient)
     this.props.stripe.createToken().then(({ token }) => {
       
-      this.props.state.updateParentState('loading', true);
+      updateParentState('loading', true);
 
       if (token === undefined) {
-        this.setState({ incomplete: true });
 
-        this.props.state.updateParentState('loading', false);
-        this.props.state.updateParentState('error', true);
+        updateParentState('loading', false);
+        updateParentState('error', true);
         setTimeout(() => {
-          this.props.state.updateParentState('error', false);
+          updateParentState('error', false);
         }, 1500);
 
       } else {
-        this.setState({ incomplete: false });
-
-        this.props.state.updateParentState('loading', true);
-        this.props.state.updateParentState('error', false);
+        updateParentState('loading', true);
+        updateParentState('error', false);
 
         axios
           .post(apiURI + send, {
@@ -45,26 +41,25 @@ class _CardForm extends React.Component {
             token: token.id,
           })
           .then(res => {
-            this.setState({ message: res.data.success });
-
-            this.props.state.updateParentState('loading', false);
-            this.props.state.updateParentState('confirmed', true);
+            // this.setState({ message: res.data.success });
+            
+            updateParentState('loading', false);
+            updateParentState('confirmed', true);
             setTimeout(() => {
-              this.props.state.updateParentState('confirmed', false);
-            }, 1000);
+              updateParentState('confirmed', false);
+            }, 1500);
           })
           .catch(error => {
-            this.setState({
-              message: 'Please try again, your message did not go through.',
-            });
+            // this.setState({
+            //   message: 'Please try again, your message did not go through.',
+            // });
             console.error(error);
 
-            this.props.state.updateParentState('loading', false);
-            this.props.state.updateParentState('error', true);
+            updateParentState('loading', false);
+            updateParentState('error', true);
             setTimeout(() => {
-              console.log('props', this.props);
-              this.props.state.updateParentState('error', false);
-            }, 3000);
+              updateParentState('error', false);
+            }, 1500);
           });
       }
     });
