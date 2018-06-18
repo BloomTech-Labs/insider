@@ -1,10 +1,9 @@
+h1 {
+  color: #FF02FF;
+}
 body {
   color: black;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-}
-.container {
-  max-width:960px;
-  margin: 0 auto;
 }
