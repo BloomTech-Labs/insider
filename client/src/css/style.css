@@ -1,0 +1,22 @@
+<<<<<<< refs/remotes/origin/peter_gray:client/src/index.css
+h1 {
+  color: #FF02FF;
+=======
+#logo {
+  max-width: 300px;
+>>>>>>> Add improved structure for LESS/CSS:client/src/css/style.css
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: black;
+}
+<<<<<<< refs/remotes/origin/peter_gray:client/src/index.css
+=======
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+/*# sourceMappingURL=style.css.map */
+>>>>>>> Add improved structure for LESS/CSS:client/src/css/style.css

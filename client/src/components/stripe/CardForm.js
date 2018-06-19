@@ -70,10 +70,7 @@ class _CardForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Card details
           <CardElement />
-        </label>
         <button>Pay</button>
       </form>
     );
