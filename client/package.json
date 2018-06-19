@@ -14,10 +14,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "lessc ./src/less/index.less ./src/css/style.css --source-map=./src/css/style.css.map",
+    "watch-less": "less-watch-compiler ./src/less ./src/css index.less --source-map"
   },
   "devDependencies": {
     "flow": "^0.2.3",
-    "flow-bin": "^0.74.0"
+    "flow-bin": "^0.74.0",
+    "less-watch-compiler": "^1.11.3"
   }
 }
