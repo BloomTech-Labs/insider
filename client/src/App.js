@@ -4,48 +4,41 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MessageForm from './components/MessageForm';
 import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
-import './App.css';
 
 class App extends Component {
   // eslint-disable-line arrow-body-style
   state = {
     loading: false,
+    error: false,
+    confirmed: false
   };
 
-  updateLoadingState = loadingState => {
+  updateParentState = ( attribute, inputState) => {
     this.setState({
-      loading: loadingState,
+      [ attribute ]: inputState,
     });
   };
 
   render() {
     return (
-      <div className="container">
+      <div className="container align-items-center d-flex flex-column"> 
         <div className="header">
-          <h1>Anonymous Texts</h1>
+          <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
         </div>
-        <div>
-        {this.state.loading && <Loading />}
-        </div>
-        {/* React Router routes based on current path, some
-      components may need to be repeated because of this. */}
+        <Loading state={this.state}/>
         <Router>
-          <div className="">
+          <div className ="row">
             <Route
               path="/"
               exact
-              render={(props) => <MessageForm {...props} updateLoadingState={this.updateLoadingState} />}
+              render={(props) => <MessageForm {...props} updateParentState={this.updateParentState} loadingState={this.state}/>}
             />
             <Route path="/" exact component={MessageFeed} />
-            {/* <Route path="/account" exact component={Acount} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignUpForm} />
-        <Route path="/change-password" component={ChangePassword} /> */}
           </div>
         </Router>
       </div>
     );
-  }
+  } 
 }
 
 export default App;

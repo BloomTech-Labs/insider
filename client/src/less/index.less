@@ -1,0 +1,35 @@
+@import "./vars.less";
+@import "./mixins.less";
+@import "./header.less";
+@import "./footer.less";
+@import "./message-form.less";
+@import "./message-feed.less";
+
+
+body {
+  background-color: @nice-white;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: black;
+}
+
+.container {
+  background-color: white;
+  max-width:800px;
+  margin: 0 auto;
+}
+
+
+.message-col {
+  max-width: 500px;
+  border: solid 1px lightgray;
+  padding: 30px;
+  border-radius: 25px;
+}
+.justify-content-center {
+  -webkit-box-pack: center !important;
+  -webkit-justify-content: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+}
