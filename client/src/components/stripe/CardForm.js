@@ -1,6 +1,7 @@
 import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
 import { CardElement } from 'react-stripe-elements';
+
 import axios from 'axios';
 
 const apiURI =
@@ -10,30 +11,49 @@ const apiURI =
 const send = 'send';
 
 class _CardForm extends React.Component {
-
-  handleSubmit = ev => {
-    const { updateParentState } = this.props.state
-    // this.props.update'loading'State(true)
-    ev.preventDefault();
-    // Creates Stripe token
-    const { message, recipient } = this.props.state;
-    // console.log(message, recipient)
-    this.props.stripe.createToken().then(({ token }) => {
-      
-      updateParentState('loading', true);
-
-      if (token === undefined) {
-
+  loadingStatus = status => {
+    const { updateParentState } = this.props.state;
+    switch (status) {
+      case 'loading':
+        updateParentState('loading', true);
+        updateParentState('error', false);
+        updateParentState('confirmed', false);
+        break;
+      case 'error':
         updateParentState('loading', false);
+        updateParentState('confirmed', false);
         updateParentState('error', true);
         setTimeout(() => {
           updateParentState('error', false);
         }, 1500);
-
-      } else {
-        updateParentState('loading', true);
+        break;
+      case 'confirmed':
+        updateParentState('confirmed', true);
+        updateParentState('loading', false);
         updateParentState('error', false);
+        setTimeout(() => {
+          updateParentState('confirmed', false);
+        }, 1500);
+        break;
+      default:
+        updateParentState('confirmed', false);
+        updateParentState('loading', false);
+        updateParentState('error', false);
+    }
+  };
 
+  handleSubmit = ev => {
+    ev.preventDefault();
+    
+    const { message, recipient } = this.props.state;
+    this.loadingStatus('loading');
+
+    // Creates Stripe token
+    this.props.stripe.createToken().then(({ token }) => {
+      if (token === undefined) {
+        this.loadingStatus('error');
+      } else {
+        this.loadingStatus('loading');
         axios
           .post(apiURI + send, {
             message,
@@ -41,36 +61,21 @@ class _CardForm extends React.Component {
             token: token.id,
           })
           .then(res => {
-            // this.setState({ message: res.data.success });
-            
-            updateParentState('loading', false);
-            updateParentState('confirmed', true);
-            setTimeout(() => {
-              updateParentState('confirmed', false);
-            }, 1500);
+            console.log(res);
+            this.loadingStatus('confirmed');
           })
           .catch(error => {
-            // this.setState({
-            //   message: 'Please try again, your message did not go through.',
-            // });
             console.error(error);
-
-            updateParentState('loading', false);
-            updateParentState('error', true);
-            setTimeout(() => {
-              updateParentState('error', false);
-            }, 1500);
+            this.loadingStatus('error');
           });
       }
     });
-    // Extracts out message from props
-    // console.log(message, recipient, token)
-    // Makes API call to /send that send token info to stripe and onsuccessful charge, sends a message on to Twilio
   };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-          <CardElement />
+        <CardElement />
         <button>Pay</button>
       </form>
     );

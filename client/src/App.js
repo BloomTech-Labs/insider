@@ -6,8 +6,7 @@ import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
 
 class App extends Component {
-  // eslint-disable-line arrow-body-style
-  state = {
+  state = { // eslint-disable-line
     loading: false,
     error: false,
     confirmed: false
