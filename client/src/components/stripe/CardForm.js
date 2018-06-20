@@ -71,7 +71,7 @@ class _CardForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
           <CardElement />
-        <button>Pay</button>
+        <button type='button' className = "button-control btn btn-sm btn-primary">Pay</button>
       </form>
     );
   }
