@@ -4,6 +4,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MessageForm from './components/MessageForm';
 import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
+import Icons from './components/Icons';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStroopwafel)
 
 class App extends Component {
   state = {
@@ -16,7 +23,7 @@ class App extends Component {
   };
 
   updateParentState = (attribute, inputState) => {
-      this.setState({ [attribute]: inputState });
+    this.setState({ [attribute]: inputState });
   };
 
   render() {
@@ -28,29 +35,34 @@ class App extends Component {
         </div>
         <Router>
           <div>
-          <div className="row">
-            <Route
-              path="/"
-              exact
-              render={props => (
-                <MessageForm
-                  updateParentState={this.updateParentState}
-                  loadingState={this.state}
-                />
-              )}
-            /></div>
+            <div className="icons">
+              <Route path="/" exact component={Icons} />
+            </div>
             <div className="row">
-            <h3> Recent Activity </h3>
-            <Route path="/" exact component={MessageFeed} />
-            
-            {/* <Route path="/about" exact component={AboutUs} />
+              <Route
+                path="/"
+                exact
+                render={props => (
+                  <MessageForm
+                    updateParentState={this.updateParentState}
+                    loadingState={this.state}
+                  />
+                )}
+              /></div>
+
+            <div className="row">
+              <h4> Recent Activity </h4>
+              <Route path="/" exact component={MessageFeed} />
+
+
+              {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}
             </div>
-            </div>
+          </div>
         </Router>
-      </div>
+      </div >
     );
-  } 
+  }
 }
 
 export default App;
