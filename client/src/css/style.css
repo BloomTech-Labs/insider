@@ -1,9 +1,6 @@
 #logo {
   max-width: 300px;
 }
-.h6 {
-  color: #5576FF;
-}
 body {
   background-color: #f5f8fd;
   margin: 0;
@@ -12,15 +9,23 @@ body {
   color: black;
 }
 .container {
+  width: 100%;
   background-color: white;
   max-width: 800px;
   margin: 0 auto;
 }
-.message-col {
+.send-message,
+.message-feed {
+  width: 100%;
   max-width: 500px;
   border: solid 1px lightgray;
   padding: 30px;
   border-radius: 25px;
+  margin-bottom: 30px;
+}
+.StripeElement {
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 .justify-content-center {
   -webkit-box-pack: center !important;

@@ -148,7 +148,7 @@ export default class MessageFeed extends Component {
 
   render() {
     return (
-      <div className="message-col">
+      <div className="send-message">
         <p>Enter phone number to send SMS to: </p>
         <form>
           <label for="recipient">To:</label>

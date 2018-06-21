@@ -62,7 +62,7 @@ class _CardForm extends React.Component {
   render() {
     return (
       <div>
-        <CardElement onChange={element => this.isComplete(element)} onReady={(element) => this._element = element}/>
+        <CardElement style={{base: {fontSize: '18px'}}} onChange={element => this.isComplete(element)} onReady={(element) => this._element = element}/>
         <button type='button' className = "button-control btn btn-sm btn-primary" onClick={this.createToken}>Send Text</button>
       </div>
     );

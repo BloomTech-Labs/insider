@@ -21,13 +21,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container align-items-center d-flex flex-column"> 
-        <div className="header">
+      <div className="container align-items-center d-flex flex-column">
+        <div className="header row">
           <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
         </div>
         <Loading state={this.state} />
         <Router>
-          <div className ="row">
+          <div>
+          <div className="row">
             <Route
               path="/"
               exact
@@ -37,11 +38,13 @@ class App extends Component {
                   loadingState={this.state}
                 />
               )}
-            />
+            /></div>
+            <div className="row">
             <Route path="/" exact component={MessageFeed} />
             {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}
-          </div>
+            </div>
+            </div>
         </Router>
       </div>
     );
