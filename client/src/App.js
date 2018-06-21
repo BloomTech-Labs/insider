@@ -21,13 +21,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container align-items-center d-flex flex-column"> 
         <div className="header">
           <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
         </div>
         <Loading state={this.state} />
         <Router>
-          <div>
+          <div className ="row">
             <Route
               path="/"
               exact
@@ -45,7 +45,7 @@ class App extends Component {
         </Router>
       </div>
     );
-  }
+  } 
 }
 
 export default App;

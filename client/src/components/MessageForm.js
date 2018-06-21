@@ -3,15 +3,10 @@ import { StripeProvider } from 'react-stripe-elements';
 import axios from 'axios';
 
 import Checkout from './stripe/Elements';
-
-const apiURI =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5050/api/'
-    : 'https://limitless-refuge-43765.herokuapp.com/api/';
-const send = 'send';
-
-export default class MessageForm extends Component {
-  state = {
+import './message-form.css';
+export default class MessageFeed extends Component {
+  // Constructor not needed in React 16
+  state = { // eslint-disable-line
     recipient: '',
     message: '',
     token: '',
@@ -145,21 +140,25 @@ export default class MessageForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className ="message-col">
         <p>Enter phone number to send SMS to: </p>
         <form>
-          <input
+        <h6> To:</h6>
+        <input type = "TEL"
+          className = "number-form form-control" 
             name="recipient"
             onChange={this.handleInput}
             value={this.state.recipient}
             placeholder="number"
-          />
-          <input
-            name="message"
-            onChange={this.handleInput}
-            value={this.state.message}
-            placeholder="text"
-          />
+        <h6> Message </h6>
+        <input 
+          name="message" 
+          className="message-form form-control"
+          onChange={this.handleInput} 
+          value={this.state.message}
+          placeholder="text"
+        />
+        <p>Don't forget your country code, e.g., +1 in the US.</p>
           <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
             <Checkout
               loadingStatus={this.loadingStatus}
@@ -170,7 +169,6 @@ export default class MessageForm extends Component {
             />
           </StripeProvider>
         </form>
-        <p>Don't forget your country code, e.g., +1 in the US.</p>
       </div>
     );
   }
