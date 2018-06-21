@@ -11,9 +11,11 @@ export default class Icons extends Component {
   render() {
     return (
       <div>
-        <FontAwesomeIcon icon="keyboard" size="5x" />
-        <FontAwesomeIcon icon="tint" size="5x" />
-        <FontAwesomeIcon icon="envelope" size="5x" />
+        <FontAwesomeIcon icon="keyboard" size="2x" /> Send a Message
+        <br>
+
+        </br>
+        <FontAwesomeIcon icon="envelope" size="2x" />Contact Us
       </div>
     )
   }
