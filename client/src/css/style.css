@@ -1,6 +1,10 @@
 #logo {
   max-width: 300px;
 }
+.message-feed {
+  font-size: 10px;
+  color: white;
+}
 #loading-completed,
 #loader,
 #loading-error {
@@ -110,4 +114,35 @@ body {
   -ms-flex-pack: center !important;
   justify-content: center !important;
 }
+
+.message 
+{
+position: relative;
+width: auto;
+height: auto;
+padding: -20px;
+background: #5576FF;
+-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+border-radius: 30px;
+border: #5576FF solid 4px;
+margin-bottom: 25px;
+}
+
+
+
+.message:after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 2x solid #5576FF;
+  border-right: 20px solid transparent;
+  border-top: 16px solid #5576FF;
+  border-bottom: 10px solid transparent;
+  left: -1px;
+  bottom: -16px;
+}
+
+
 /*# sourceMappingURL=style.css.map */
