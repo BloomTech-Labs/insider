@@ -33,7 +33,6 @@ class App extends Component {
               exact
               render={props => (
                 <MessageForm
-                  {...props}
                   updateParentState={this.updateParentState}
                   loadingState={this.state}
                 />

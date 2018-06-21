@@ -14,15 +14,12 @@ class _CardForm extends React.Component {
       this.setState({
         complete: true,
       });
-      loadingStatus();
     } else if (element.error !== undefined) {
-      loadingStatus('errorNoOverlay', [element.error.message])
-    } else {
       this.setState({
         complete: false,
       });
-      loadingStatus('errorNoOverlay', ['Please fill out all CC fields.'])
-    }
+      loadingStatus('error', ['Please fill out all CC fields.']);
+    } 
   };
 
   createToken = e => {
@@ -32,13 +29,13 @@ class _CardForm extends React.Component {
       loadingStatus,
       setToken,
       sendForm,
+      clearFields
     } = this.props.state;
 
     loadingStatus('loading', '');
 
     // Creates Stripe token
     if (this.state.complete) {
-      console.log(this.props)
       this.props.stripe
         .createToken()
         .then(({ token }) => {
@@ -47,12 +44,15 @@ class _CardForm extends React.Component {
           } else {
             loadingStatus('confirmed');
             setToken(token);
-            sendForm();
+            sendForm().then(() => this._element.clear());
           }
         })
         .catch(error => {
-          console.log(error)
-          loadingStatus('error', ['An error occured, please try again.']);
+          if(error.message) {
+            loadingStatus('error', [error.message]);
+          } else {
+            loadingStatus('error', ['An error occured. Please check your internet connection and try again.']);
+          }
         });
     } else {
       loadingStatus('error', ['Please fill out all CC fields.']);
@@ -62,9 +62,8 @@ class _CardForm extends React.Component {
   render() {
     return (
       <div>
-        <CardElement onChange={element => this.isComplete(element)} />
+        <CardElement onChange={element => this.isComplete(element)} onReady={(element) => this._element = element}/>
         <button onClick={this.createToken}>Send Text</button>
-        {this.state.error && <p>{this.state.error}</p>}
       </div>
     );
   }

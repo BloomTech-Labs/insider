@@ -12,12 +12,11 @@ const send = 'send';
 
 export default class MessageForm extends Component {
   state = {
-    // eslint-disable-line
     recipient: '',
     message: '',
     token: '',
-    error: '',
     validPhone: false,
+    clearFields: false
   };
 
   setStripeToken = token => {
@@ -84,6 +83,7 @@ export default class MessageForm extends Component {
         });
     }
   };
+
   validatePhone = recipient => {
     this.setState({ validPhone: true });
   };
@@ -97,11 +97,11 @@ export default class MessageForm extends Component {
     if (
       message !== '' &&
       recipient !== '' &&
-      validPhone &&
+      // validPhone &&
       token !== undefined
     ) {
       this.loadingStatus('loading');
-      axios
+      return axios
         .post(apiURI + send, {
           message,
           recipient,
@@ -109,6 +109,13 @@ export default class MessageForm extends Component {
         })
         .then(res => {
           this.loadingStatus('confirmed');
+          this.setState({
+            recipient: '',
+            message: '',
+            token: '',
+            clearFields: true
+          });
+
         })
         .catch(error => {
           if(error.message) {
@@ -127,8 +134,6 @@ export default class MessageForm extends Component {
         this.loadingStatus('error', ['Please enter a message.']);
       } else if (recipient === '') {
         this.loadingStatus('error', ['Please enter a valid phone number.']);
-      } else {
-        this.loadingStatus('', ['Please check all fields.']);
       }
     }
   };
@@ -142,15 +147,17 @@ export default class MessageForm extends Component {
     return (
       <div>
         <p>Enter phone number to send SMS to: </p>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <input
             name="recipient"
             onChange={this.handleInput}
+            value={this.state.recipient}
             placeholder="number"
           />
           <input
             name="message"
             onChange={this.handleInput}
+            value={this.state.message}
             placeholder="text"
           />
           <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
@@ -159,7 +166,7 @@ export default class MessageForm extends Component {
               setToken={this.setStripeToken}
               loadingState={this.props.loadingState.loadingMessage}
               sendForm={this.sendForm}
-              // updateParentState={this.props.updateParentState}
+              clearFields={this.state.clearFields}
             />
           </StripeProvider>
         </form>
