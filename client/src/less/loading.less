@@ -1,22 +1,15 @@
-#logo {
-  max-width: 300px;
-}
-#loading-completed,
-#loader,
-#loading-error {
+#loading-completed, #loader, #loading-error {
   visibility: visible;
-  opacity: 1;
+  opacity:1;
   transition: visibility 0s, opacity 1s;
 }
-#loading-completed.hide,
-#loader.hide,
-#loading-error.hide {
+#loading-completed.hide, #loader.hide, #loading-error.hide {
   visibility: hidden;
-  opacity: 0;
+  opacity:0;
   transition: visibility 1.5s, opacity 1s;
 }
 .full-screen {
-  color: white;
+  color:white;
   z-index: 999;
   position: absolute;
   top: 50%;
@@ -24,17 +17,17 @@
   transform: translate(-50%, -50%);
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, .75);
   display: flex;
   align-items: center;
   justify-content: center;
   visibility: visible;
-  opacity: 1;
+  opacity:1;
   transition: visibility 0s, opacity 1s;
 }
 .full-screen.hide {
   visibility: hidden;
-  opacity: 0;
+  opacity:0;
   transition: visibility 1.5s, opacity 1s;
 }
 #loader {
@@ -42,7 +35,7 @@
   animation: Rotate 2s ease-in-out infinite;
 }
 .loading {
-  text-align: center;
+  text-align:center;
 }
 @keyframes Rotate {
   50% {
@@ -55,46 +48,14 @@
     -moz-transform: rotate(380deg);
     tranform: rotate(380deg);
   }
-  80% {
+    80% {
     -webkit-transform: rotate(340deg);
     -moz-transform: rotate(340deg);
     tranform: rotate(340deg);
   }
-  100% {
+    100% {
     -webkit-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
     tranform: rotate(360deg);
   }
 }
-body {
-  background-color: #f5f8fd;
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  color: black;
-}
-.container {
-  width: 100%;
-  background-color: white;
-  max-width: 800px;
-  margin: 0 auto;
-}
-.send-message,
-.message-feed {
-  width: 100%;
-  max-width: 500px;
-  border: solid 1px lightgray;
-  padding: 30px;
-  border-radius: 25px;
-  margin-bottom: 30px;
-}
-.StripeElement {
-  margin-bottom: 10px;
-}
-.justify-content-center {
-  -webkit-box-pack: center !important;
-  -webkit-justify-content: center !important;
-  -ms-flex-pack: center !important;
-  justify-content: center !important;
-}
-/*# sourceMappingURL=style.css.map */

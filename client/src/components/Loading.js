@@ -6,11 +6,12 @@ import './loading.css';
 
 // Flow type checking
 const Loading = (props) => {
+  const { loadMessage } = props.state
   return (
     <div>
-      <Loader loading={props.state.loading} />
-      <Confirmed confirmed={props.state.confirmed} />
-      <Error error={props.state.error} />
+      <Loader loading={props.state.loadMessage.loading} />
+      <Confirmed confirmed={props.state.loadMessage.confirmed} />
+      <Error error={props.state.loadMessage.error} message={props.state.loadMessage.message} />
     </div>
   );
 };

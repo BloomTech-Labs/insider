@@ -1,78 +1,70 @@
 import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
 import { CardElement } from 'react-stripe-elements';
-import axios from 'axios';
-
-const apiURI =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5050/api/'
-    : 'https://limitless-refuge-43765.herokuapp.com/api/';
-const send = 'send';
 
 class _CardForm extends React.Component {
-
-  handleSubmit = ev => {
-    const { updateParentState } = this.props.state
-    // this.props.update'loading'State(true)
-    ev.preventDefault();
-    // Creates Stripe token
-    const { message, recipient } = this.props.state;
-    // console.log(message, recipient)
-    this.props.stripe.createToken().then(({ token }) => {
-      
-      updateParentState('loading', true);
-
-      if (token === undefined) {
-
-        updateParentState('loading', false);
-        updateParentState('error', true);
-        setTimeout(() => {
-          updateParentState('error', false);
-        }, 1500);
-
-      } else {
-        updateParentState('loading', true);
-        updateParentState('error', false);
-
-        axios
-          .post(apiURI + send, {
-            message,
-            recipient,
-            token: token.id,
-          })
-          .then(res => {
-            // this.setState({ message: res.data.success });
-            
-            updateParentState('loading', false);
-            updateParentState('confirmed', true);
-            setTimeout(() => {
-              updateParentState('confirmed', false);
-            }, 1500);
-          })
-          .catch(error => {
-            // this.setState({
-            //   message: 'Please try again, your message did not go through.',
-            // });
-            console.error(error);
-
-            updateParentState('loading', false);
-            updateParentState('error', true);
-            setTimeout(() => {
-              updateParentState('error', false);
-            }, 1500);
-          });
-      }
-    });
-    // Extracts out message from props
-    // console.log(message, recipient, token)
-    // Makes API call to /send that send token info to stripe and onsuccessful charge, sends a message on to Twilio
+  state = {
+    complete: false,
   };
+
+  // Checks whether the Stripe form has been completed and gives error feedback
+  isComplete = element => {
+    const { loadingStatus } = this.props.state;
+    if (element.complete && !element.empty && element.error === undefined) {
+      this.setState({
+        complete: true,
+      });
+    } else if (element.error !== undefined) {
+      this.setState({
+        complete: false,
+      });
+      loadingStatus('error', ['Please fill out all CC fields.']);
+    } 
+  };
+
+  createToken = e => {
+    e.preventDefault();
+
+    const {
+      loadingStatus,
+      setToken,
+      sendForm,
+      clearFields
+    } = this.props.state;
+
+    loadingStatus('loading', '');
+
+    // Creates Stripe token
+    if (this.state.complete) {
+      this.props.stripe
+        .createToken()
+        .then(({ token }) => {
+          if (token === undefined) {
+            loadingStatus('error', ['Stripe was not able to create a token.']);
+          } else {
+            loadingStatus('confirmed');
+            setToken(token);
+            sendForm().then(() => this._element.clear());
+          }
+        })
+        .catch(error => {
+          if(error.message) {
+            loadingStatus('error', [error.message]);
+          } else {
+            loadingStatus('error', ['An error occured. Please check your internet connection and try again.']);
+          }
+        });
+    } else {
+      loadingStatus('error', ['Please fill out all CC fields.']);
+    }
+  };
+
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-          <CardElement />
-        <button type='button' className = "button-control btn btn-sm btn-primary">Pay</button>
-      </form>
+      <div>
+        <CardElement style={{base: {fontSize: '18px'}}} onChange={element => this.isComplete(element)} onReady={(element) => this._element = element}/>
+        <button type='button' className = "button-control btn btn-sm btn-primary" onClick={this.createToken}>Send Text</button>
+      </div>
     );
   }
 }
