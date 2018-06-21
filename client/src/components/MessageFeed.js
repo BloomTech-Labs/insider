@@ -24,7 +24,7 @@ export default class MessageFeed extends Component<State> {
 
   render() {
     return (
-      <div className="message-feed">
+      <div className="message-feed" >
         {this.state.messages.map((message) => {
           return (
             <Message

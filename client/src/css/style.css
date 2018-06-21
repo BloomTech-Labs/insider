@@ -71,9 +71,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: black;
+  color: #5576FF;
+}
+.row {
+  justify-content: center;
 }
 .container {
+  font-style: bold;
   width: 100%;
   background-color: white;
   max-width: 800px;
@@ -81,11 +85,13 @@ body {
 }
 .send-message,
 .message-feed {
+  text-align: center;
+  font-size: .85rem;
   width: 100%;
   max-width: 500px;
   border: solid 1px lightgray;
   padding: 30px;
-  border-radius: 25px;
+  border-radius: 15px;
   margin-bottom: 30px;
 }
 .StripeElement {

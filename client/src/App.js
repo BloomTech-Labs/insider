@@ -40,7 +40,9 @@ class App extends Component {
               )}
             /></div>
             <div className="row">
+            <h3> Recent Activity </h3>
             <Route path="/" exact component={MessageFeed} />
+            
             {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}
             </div>
