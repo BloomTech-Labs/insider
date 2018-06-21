@@ -6,35 +6,45 @@ import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
 
 class App extends Component {
-  // eslint-disable-line arrow-body-style
   state = {
-    loading: false,
-    error: false,
-    confirmed: false
+    loadMessage: {
+      message: [],
+      loading: false,
+      error: false,
+      confirmed: false,
+    }
   };
 
-  updateParentState = ( attribute, inputState) => {
-    this.setState({
-      [ attribute ]: inputState,
-    });
+  updateParentState = (attribute, inputState) => {
+      this.setState({ [attribute]: inputState });
   };
 
   render() {
     return (
-      <div className="container align-items-center d-flex flex-column"> 
-        <div className="header">
+      <div className="container align-items-center d-flex flex-column">
+        <Loading state={this.state} />
+        <div className="header row">
           <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
         </div>
-        <Loading state={this.state}/>
         <Router>
-          <div className ="row">
+          <div>
+          <div className="row">
             <Route
               path="/"
               exact
-              render={(props) => <MessageForm {...props} updateParentState={this.updateParentState} loadingState={this.state}/>}
-            />
+              render={props => (
+                <MessageForm
+                  updateParentState={this.updateParentState}
+                  loadingState={this.state}
+                />
+              )}
+            /></div>
+            <div className="row">
             <Route path="/" exact component={MessageFeed} />
-          </div>
+            {/* <Route path="/about" exact component={AboutUs} />
+            <Route path="/contact" exact component={Contact} /> */}
+            </div>
+            </div>
         </Router>
       </div>
     );
