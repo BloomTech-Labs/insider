@@ -94,7 +94,7 @@ export default class MessageFeed extends Component {
     const { message, recipient, token, validPhone } = this.state;
     this.loadingStatus('loading');
 
-    this.validatePhone(recipient);
+    // this.validatePhone(recipient);
 
     if (
       message !== '' &&
@@ -110,15 +110,16 @@ export default class MessageFeed extends Component {
           token: token.id,
         })
         .then(res => {
+          console.log(res);
           this.loadingStatus('confirmed');
           this.setState({
             recipient: '',
             message: '',
             token: '',
-            clearFields: true,
           });
         })
         .catch(error => {
+          console.error(error)
           if (error.message) {
             this.loadingStatus('error', [error.message]);
           } else {
@@ -151,7 +152,7 @@ export default class MessageFeed extends Component {
       <div className="send-message">
         <p>Enter phone number to send SMS to: </p>
         <form>
-          <label for="recipient">To</label>
+          <label htmlFor="recipient">To</label>
           <input
             type="tel"
             className="number-form form-control"
@@ -160,7 +161,7 @@ export default class MessageFeed extends Component {
             value={this.state.recipient}
             placeholder="number"
           />
-          <label for="message">Message</label>
+          <label htmlFor="message">Message</label>
           <input
             name="message"
             className="message-form form-control"
