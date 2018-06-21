@@ -6,16 +6,17 @@ import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
 
 class App extends Component {
-  state = { // eslint-disable-line
-    loading: false,
-    error: false,
-    confirmed: false
+  state = {
+    loadMessage: {
+      message: [],
+      loading: false,
+      error: false,
+      confirmed: false,
+    }
   };
 
-  updateParentState = ( attribute, inputState) => {
-    this.setState({
-      [ attribute ]: inputState,
-    });
+  updateParentState = (attribute, inputState) => {
+      this.setState({ [attribute]: inputState });
   };
 
   render() {
@@ -24,15 +25,23 @@ class App extends Component {
         <div className="header">
           <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
         </div>
-        <Loading state={this.state}/>
+        <Loading state={this.state} />
         <Router>
           <div>
             <Route
               path="/"
               exact
-              render={(props) => <MessageForm {...props} updateParentState={this.updateParentState} loadingState={this.state}/>}
+              render={props => (
+                <MessageForm
+                  {...props}
+                  updateParentState={this.updateParentState}
+                  loadingState={this.state}
+                />
+              )}
             />
             <Route path="/" exact component={MessageFeed} />
+            {/* <Route path="/about" exact component={AboutUs} />
+            <Route path="/contact" exact component={Contact} /> */}
           </div>
         </Router>
       </div>

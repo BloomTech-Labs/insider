@@ -2,82 +2,70 @@ import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
 import { CardElement } from 'react-stripe-elements';
 
-import axios from 'axios';
-
-const apiURI =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:5050/api/'
-    : 'https://limitless-refuge-43765.herokuapp.com/api/';
-const send = 'send';
-
 class _CardForm extends React.Component {
-  loadingStatus = status => {
-    const { updateParentState } = this.props.state;
-    switch (status) {
-      case 'loading':
-        updateParentState('loading', true);
-        updateParentState('error', false);
-        updateParentState('confirmed', false);
-        break;
-      case 'error':
-        updateParentState('loading', false);
-        updateParentState('confirmed', false);
-        updateParentState('error', true);
-        setTimeout(() => {
-          updateParentState('error', false);
-        }, 1500);
-        break;
-      case 'confirmed':
-        updateParentState('confirmed', true);
-        updateParentState('loading', false);
-        updateParentState('error', false);
-        setTimeout(() => {
-          updateParentState('confirmed', false);
-        }, 1500);
-        break;
-      default:
-        updateParentState('confirmed', false);
-        updateParentState('loading', false);
-        updateParentState('error', false);
+  state = {
+    complete: false,
+  };
+
+  // Checks whether the Stripe form has been completed and gives error feedback
+  isComplete = element => {
+    const { loadingStatus } = this.props.state;
+    if (element.complete && !element.empty && element.error === undefined) {
+      this.setState({
+        complete: true,
+      });
+      loadingStatus();
+    } else if (element.error !== undefined) {
+      loadingStatus('errorNoOverlay', [element.error.message])
+    } else {
+      this.setState({
+        complete: false,
+      });
+      loadingStatus('errorNoOverlay', ['Please fill out all CC fields.'])
     }
   };
 
-  handleSubmit = ev => {
-    ev.preventDefault();
-    
-    const { message, recipient } = this.props.state;
-    this.loadingStatus('loading');
+  createToken = e => {
+    e.preventDefault();
+
+    const {
+      loadingStatus,
+      setToken,
+      sendForm,
+    } = this.props.state;
+
+    loadingStatus('loading', '');
 
     // Creates Stripe token
-    this.props.stripe.createToken().then(({ token }) => {
-      if (token === undefined) {
-        this.loadingStatus('error');
-      } else {
-        this.loadingStatus('loading');
-        axios
-          .post(apiURI + send, {
-            message,
-            recipient,
-            token: token.id,
-          })
-          .then(res => {
-            console.log(res);
-            this.loadingStatus('confirmed');
-          })
-          .catch(error => {
-            console.error(error);
-            this.loadingStatus('error');
-          });
-      }
-    });
+    if (this.state.complete) {
+      console.log(this.props)
+      this.props.stripe
+        .createToken()
+        .then(({ token }) => {
+          if (token === undefined) {
+            loadingStatus('error', ['Stripe was not able to create a token.']);
+          } else {
+            loadingStatus('confirmed');
+            setToken(token);
+            sendForm();
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          loadingStatus('error', ['An error occured, please try again.']);
+        });
+    } else {
+      loadingStatus('error', ['Please fill out all CC fields.']);
+    }
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <CardElement />
-        <button>Pay</button>
-      </form>
+      <div>
+        <CardElement onChange={element => this.isComplete(element)} />
+        <button onClick={this.createToken}>Send Text</button>
+        {this.state.error && <p>{this.state.error}</p>}
+      </div>
     );
   }
 }

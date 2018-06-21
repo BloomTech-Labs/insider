@@ -20,6 +20,9 @@ const Error = (props) => {
           />
         </svg>
         <p>Houston we have a problem.</p>
+        {props.message.map((message) => {
+          return <p>{ message }</p>;
+        })}
       </div>
     </div>
   );
