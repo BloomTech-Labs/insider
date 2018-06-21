@@ -22,10 +22,10 @@ class App extends Component {
   render() {
     return (
       <div className="container align-items-center d-flex flex-column">
+        <Loading state={this.state} />
         <div className="header row">
           <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
         </div>
-        <Loading state={this.state} />
         <Router>
           <div>
           <div className="row">

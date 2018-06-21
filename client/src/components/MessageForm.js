@@ -151,7 +151,7 @@ export default class MessageFeed extends Component {
       <div className="send-message">
         <p>Enter phone number to send SMS to: </p>
         <form>
-          <label for="recipient">To:</label>
+          <label for="recipient">To</label>
           <input
             type="tel"
             className="number-form form-control"
