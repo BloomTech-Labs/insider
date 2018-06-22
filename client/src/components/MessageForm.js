@@ -85,7 +85,6 @@ export default class MessageFeed extends Component {
         });
     }
   };
-
   validatePhone = recipient => {
     this.setState({ validPhone: true });
   };
