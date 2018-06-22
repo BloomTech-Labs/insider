@@ -12,20 +12,8 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
-.send-message,
-.message-feed {
-  background-color: #FEFEFF;
-  text-align: center;
-  font-size: .85rem;
-  width: 100%;
-  max-width: 500px;
-  border: solid 1px lightgray;
-  padding: 30px;
-  border-radius: 5px;
-  margin-bottom: 30px;
-}
 .StripeElement {
-  margin-bottom: 10px;
+  margin: 20px 0;
 }
 .btn-light {
   background-color: #5576FF;
@@ -36,10 +24,14 @@ body {
   background-color: white;
   color: #5576FF;
 }
+h1,
+h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
 #logo {
   max-width: 300px;
   width: 100%;
-  padding: 10px;
 }
 .navbar {
   background-color: #5576FF;
@@ -55,10 +47,22 @@ body {
 .navbar #white-logo {
   height: 40px;
 }
+.send-message label:first-child {
+  margin-top: 0;
+}
+.send-message label {
+  margin-top: .5rem;
+  margin-bottom: 0;
+}
+.send-message input {
+  margin-bottom: 10px;
+}
+::placeholder {
+  color: lightgray;
+}
 .send-message,
 .message-feed {
   background-color: #FEFEFF;
-  text-align: center;
   font-size: .85rem;
   width: 100%;
   max-width: 500px;
@@ -66,6 +70,7 @@ body {
   padding: 30px;
   border-radius: 5px;
   margin-bottom: 30px;
+  text-align: left;
 }
 .message-feed {
   color: white;

@@ -159,7 +159,6 @@ export default class MessageFeed extends Component {
   render() {
     return (
       <div className="send-message">
-        <p>Enter phone number to send SMS to: </p>
         <form>
           <label htmlFor="recipient">To</label>
           <input
@@ -178,7 +177,6 @@ export default class MessageFeed extends Component {
             value={this.state.message}
             placeholder="text"
           />
-          <p>Don't forget your country code, e.g., +1 in the US.</p>
           <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
             <Checkout
               loadingStatus={this.loadingStatus}

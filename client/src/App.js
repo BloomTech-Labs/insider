@@ -29,7 +29,6 @@ class App extends Component {
   render() {
     return (
       <div>
-
         <nav className="navbar navbar-expand-sm">
           <a className="navbar-brand" href="#">
             <img
@@ -52,11 +51,9 @@ class App extends Component {
         <div className="row">
           <img id="logo" src="/images/ghost_texts_blue.svg" alt="Ghost Texts Logo" />
         </div>
+        <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
         <Router>
           <div>
-            <div className="icons">
-              <Route path="/" exact component={Icons} />
-            </div>
             <div>
               <Route
                 path="/"
@@ -70,7 +67,7 @@ class App extends Component {
               />
             </div>
 
-            <h2> Recent Activity </h2>
+            <h2 className="text-center">Recent Activity</h2>
             <Route path="/" exact component={MessageFeed} />
             {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}
