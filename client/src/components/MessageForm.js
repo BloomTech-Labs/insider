@@ -18,7 +18,6 @@ export default class MessageFeed extends Component {
     recipient: '',
     message: '',
     token: '',
-    validPhone: false,
     clearFields: false,
   };
 
@@ -87,15 +86,19 @@ export default class MessageFeed extends Component {
     }
   };
   validatePhone = recipient => {
+    console.log(this.state)
     const countryCode = recipient.startsWith('+1');
-    const isValid = countryCode
-      ? isValidNumber(recipient)
-      : isValidNumber({ phone: recipient, country: 'US' });
+
+    const newRec = countryCode ? recipient : `+1${recipient}`;
+
+    const isValid = isValidNumber(newRec)
+    console.log(this.state)
     if (!countryCode) this.setState({ recipient: `+1${recipient}` });
+    console.log(this.state)
     if (isValid) {
-      this.setState({ validPhone: true });
+      return true;
     } else {
-      this.setState({ validPhone: false });
+      return false;
     }
   };
 
@@ -103,13 +106,13 @@ export default class MessageFeed extends Component {
     const { message, recipient, token, validPhone } = this.state;
     this.loadingStatus('loading');
 
-    this.validatePhone(recipient);
+    const isValid = this.validatePhone(recipient);
 
     if (
       message !== '' &&
       recipient !== '' &&
       token !== undefined &&
-      validPhone
+      isValid
     ) {
       this.loadingStatus('loading');
       return axios
@@ -145,7 +148,7 @@ export default class MessageFeed extends Component {
         ]);
       } else if (message === '') {
         this.loadingStatus('error', ['Please enter a message.']);
-      } else if (recipient === '' || !validPhone) {
+      } else if (recipient === '' || !isValid) {
         this.loadingStatus('error', ['Please enter a valid phone number.']);
       }
     }
