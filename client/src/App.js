@@ -10,7 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faStroopwafel)
+library.add(faStroopwafel);
 
 class App extends Component {
   state = {
@@ -19,7 +19,7 @@ class App extends Component {
       loading: false,
       error: false,
       confirmed: false,
-    }
+    },
   };
 
   updateParentState = (attribute, inputState) => {
@@ -28,10 +28,29 @@ class App extends Component {
 
   render() {
     return (
+      <div>
+
+        <nav className="navbar navbar-expand-sm">
+          <a className="navbar-brand" href="#">
+            <img
+              id="white-logo"
+              src="/images/ghost-texts-heavy.svg"
+              alt="White Logo"
+            />
+          </a>
+          <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li className="nav-item active">
+        <a className="nav-link" href="#">About</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="#">Contact</a>
+      </li>
+      </ul>
+        </nav>
       <div className="container align-items-center d-flex flex-column">
         <Loading state={this.state} />
-        <div className="header row">
-          <img id="logo" src="/images/ghost_texts.svg" alt="Ghost Texts Logo" />
+        <div className="row">
+          <img id="logo" src="/images/ghost_texts_blue.svg" alt="Ghost Texts Logo" />
         </div>
         <Router>
           <div>
@@ -48,19 +67,17 @@ class App extends Component {
                     loadingState={this.state}
                   />
                 )}
-              /></div>
-
-            <div>
-              <h2> Recent Activity </h2>
-              <Route path="/" exact component={MessageFeed} />
-
-
-              {/* <Route path="/about" exact component={AboutUs} />
-            <Route path="/contact" exact component={Contact} /> */}
+              />
             </div>
+
+            <h2> Recent Activity </h2>
+            <Route path="/" exact component={MessageFeed} />
+            {/* <Route path="/about" exact component={AboutUs} />
+            <Route path="/contact" exact component={Contact} /> */}
           </div>
         </Router>
-      </div >
+      </div>
+      </div>
     );
   }
 }
