@@ -86,15 +86,15 @@ export default class MessageFeed extends Component {
     }
   };
   validatePhone = recipient => {
-    console.log(this.state)
+
     const countryCode = recipient.startsWith('+1');
 
     const newRec = countryCode ? recipient : `+1${recipient}`;
 
     const isValid = isValidNumber(newRec)
-    console.log(this.state)
+
     if (!countryCode) this.setState({ recipient: `+1${recipient}` });
-    console.log(this.state)
+
     if (isValid) {
       return true;
     } else {
