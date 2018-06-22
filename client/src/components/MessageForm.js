@@ -86,16 +86,17 @@ export default class MessageFeed extends Component {
     }
   };
   validatePhone = recipient => {
-
-    const countryCode = recipient.startsWith('+1');
+    console.log(this.state)
+    const countryCode = recipient.startsWith('+1' || '1');
 
     const newRec = countryCode ? recipient : `+1${recipient}`;
-
+    console.log(newRec)
     const isValid = isValidNumber(newRec)
 
-    if (!countryCode) this.setState({ recipient: `+1${recipient}` });
-
+    console.log(isValid)
     if (isValid) {
+      if (!countryCode) this.setState({ recipient: `+1${recipient}` });
+      console.log(this.state)
       return true;
     } else {
       return false;
@@ -141,7 +142,7 @@ export default class MessageFeed extends Component {
           }
         });
     } else {
-      if (message === '' && recipient === '') {
+      if ((message === '' && recipient === '') || ( message === '' && !isValid)) {
         this.loadingStatus('error', [
           'Please enter a valid phone number.',
           'Please enter a message.',
