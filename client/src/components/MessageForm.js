@@ -3,7 +3,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import axios from 'axios';
 
 import Checkout from './stripe/Elements';
-import { parseNumber, formatNumber,isValidNumber } from 'libphonenumber-js'
+import { isValidNumber } from 'libphonenumber-js';
 
 const apiURI =
   process.env.NODE_ENV === 'development'
@@ -87,14 +87,14 @@ export default class MessageFeed extends Component {
     }
   };
   validatePhone = recipient => {
-    
-    const isOne = recipient.startsWith("+1")
-    const phoneN = isOne ? isValidNumber(recipient) : isValidNumber({ phone: recipient, country: 'US' })
-    console.log(phoneN)
-    if (!isOne)this.setState({recipient: `+1${recipient}`})
-    if(phoneN){
-    this.setState({ validPhone: true });
-    }else{
+    const countryCode = recipient.startsWith('+1');
+    const isValid = countryCode
+      ? isValidNumber(recipient)
+      : isValidNumber({ phone: recipient, country: 'US' });
+    if (!countryCode) this.setState({ recipient: `+1${recipient}` });
+    if (isValid) {
+      this.setState({ validPhone: true });
+    } else {
       this.setState({ validPhone: false });
     }
   };
@@ -103,13 +103,13 @@ export default class MessageFeed extends Component {
     const { message, recipient, token, validPhone } = this.state;
     this.loadingStatus('loading');
 
-    // this.validatePhone(recipient);
+    this.validatePhone(recipient);
 
     if (
       message !== '' &&
       recipient !== '' &&
-      validPhone &&
-      token !== undefined
+      token !== undefined &&
+      validPhone
     ) {
       this.loadingStatus('loading');
       return axios
@@ -128,7 +128,7 @@ export default class MessageFeed extends Component {
           });
         })
         .catch(error => {
-          console.error(error)
+          console.error(error);
           if (error.message) {
             this.loadingStatus('error', [error.message]);
           } else {
@@ -145,7 +145,7 @@ export default class MessageFeed extends Component {
         ]);
       } else if (message === '') {
         this.loadingStatus('error', ['Please enter a message.']);
-      } else if (recipient === '') {
+      } else if (recipient === '' || !validPhone) {
         this.loadingStatus('error', ['Please enter a valid phone number.']);
       }
     }
