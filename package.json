@@ -17,7 +17,8 @@
   "scripts": {
     "start": "node ./server/app.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "mocha ./server/tests/*.test.js"
+    "test": "mocha ./server/tests/*.test.js",
+    "watch": "nodemon ./server/app.js"
   },
   "dependencies": {
     "chai": "^4.1.2",

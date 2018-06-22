@@ -3,7 +3,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import axios from 'axios';
 
 import Checkout from './stripe/Elements';
-import { parseNumber, formatNumber,isValidNumber } from 'libphonenumber-js'
+import { isValidNumber } from 'libphonenumber-js';
 
 const apiURI =
   process.env.NODE_ENV === 'development'
@@ -18,7 +18,6 @@ export default class MessageFeed extends Component {
     recipient: '',
     message: '',
     token: '',
-    validPhone: false,
     clearFields: false,
   };
 
@@ -86,17 +85,21 @@ export default class MessageFeed extends Component {
         });
     }
   };
-
   validatePhone = recipient => {
-    
-    const isOne = recipient.startsWith("+1")
-    const phoneN = isOne ? isValidNumber(recipient) : isValidNumber({ phone: recipient, country: 'US' })
-    console.log(phoneN)
-    if (!isOne)this.setState({recipient: `+1${recipient}`})
-    if(phoneN){
-    this.setState({ validPhone: true });
-    }else{
-      this.setState({ validPhone: false });
+    console.log(this.state)
+    const countryCode = recipient.startsWith('+1' || '1');
+
+    const newRec = countryCode ? recipient : `+1${recipient}`;
+    console.log(newRec)
+    const isValid = isValidNumber(newRec)
+
+    console.log(isValid)
+    if (isValid) {
+      if (!countryCode) this.setState({ recipient: `+1${recipient}` });
+      console.log(this.state)
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -104,13 +107,13 @@ export default class MessageFeed extends Component {
     const { message, recipient, token, validPhone } = this.state;
     this.loadingStatus('loading');
 
-    // this.validatePhone(recipient);
+    const isValid = this.validatePhone(recipient);
 
     if (
       message !== '' &&
       recipient !== '' &&
-      validPhone &&
-      token !== undefined
+      token !== undefined &&
+      isValid
     ) {
       this.loadingStatus('loading');
       return axios
@@ -129,7 +132,7 @@ export default class MessageFeed extends Component {
           });
         })
         .catch(error => {
-          console.error(error)
+          console.error(error);
           if (error.message) {
             this.loadingStatus('error', [error.message]);
           } else {
@@ -139,14 +142,14 @@ export default class MessageFeed extends Component {
           }
         });
     } else {
-      if (message === '' && recipient === '') {
+      if ((message === '' && recipient === '') || ( message === '' && !isValid)) {
         this.loadingStatus('error', [
           'Please enter a valid phone number.',
           'Please enter a message.',
         ]);
       } else if (message === '') {
         this.loadingStatus('error', ['Please enter a message.']);
-      } else if (recipient === '') {
+      } else if (recipient === '' || !isValid) {
         this.loadingStatus('error', ['Please enter a valid phone number.']);
       }
     }
@@ -160,7 +163,6 @@ export default class MessageFeed extends Component {
   render() {
     return (
       <div className="send-message">
-        <p>Enter phone number to send SMS to: </p>
         <form>
           <label htmlFor="recipient">To</label>
           <input
@@ -179,7 +181,6 @@ export default class MessageFeed extends Component {
             value={this.state.message}
             placeholder="text"
           />
-          <p>Don't forget your country code, e.g., +1 in the US.</p>
           <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
             <Checkout
               loadingStatus={this.loadingStatus}

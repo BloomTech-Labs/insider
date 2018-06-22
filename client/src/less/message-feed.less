@@ -1,20 +1,47 @@
+.send-message,
+.message-feed {
+  background-color: #FEFEFF;
+  font-size: .85rem;
+  width: 100%;
+  max-width: 500px;
+  border: solid 1px lightgray;
+  padding: 30px;
+  border-radius: 5px;
+	margin-bottom: 30px;
+	text-align:left;
+}
+.message-feed {
+  color: white;
+}
+
 .message {
-	position: relative;
-	background: #5576FF;
-	border-radius: .4em;
+  font-size: 0.875rem;
+  padding: 10px 20px;
+  text-align: left;
+  hyphens: none;
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  min-height: 40px;
+  background: #7790f9;
+  border-radius: 10px;
+  border: #768ff9 solid 4px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .message:after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-top-color: #5576FF;
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -10px;
-	margin-bottom: -20px;
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 2x solid #5576FF;
+  border-right: 20px solid transparent;
+  border-top: 16px solid #768ff9;
+  border-bottom: 10px solid transparent;
+  left: -1px;
+  bottom: -23px;
 }
