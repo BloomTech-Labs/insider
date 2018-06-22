@@ -5,6 +5,7 @@
 @import "./message-form.less";
 @import "./message-feed.less";
 @import "./loading.less";
+xx  
 
 
 body {
@@ -12,22 +13,36 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: black;
+  color: @logo-blue;
+}
+.icons {
+  font-size: 13px;
+  display: inline-block;
+  width: 400px;
+  color: @dark-blue;
+}
+
+.row {
+  justify-content: center;
 }
 
 .container {
+  font-style: bold;
   width: 100%;
-  background-color: white;
+  background-color: @nice-white;
   max-width:800px;
   margin: 0 auto;
 }
 
 .send-message, .message-feed {
+  background-color: #FEFEFF ;
+  text-align: center;
+  font-size: .85rem;
   width:100%;
   max-width: 500px;
   border: solid 1px lightgray;
   padding: 30px;
-  border-radius: 25px;
+  border-radius: 5px;
   margin-bottom:30px;
 }
 .StripeElement {
@@ -38,4 +53,47 @@ body {
   -webkit-justify-content: center !important;
       -ms-flex-pack: center !important;
           justify-content: center !important;
+}
+
+.message 
+{
+position: relative;
+width: 145px;
+height: 30px;
+padding: 3px;
+background: #5576FF;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: #5576FF solid 4px;
+}
+
+.message:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 15px 2px 0;
+border-color: #5576FF transparent;
+display: block;
+width: 0;
+z-index: 1;
+margin-left: -2px;
+bottom: -15px;
+left: 88%;
+}
+
+.message:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 18px 5px 0;
+border-color: #5576FF transparent;
+display: block;
+width: 0;
+z-index: 0;
+margin-left: -5px;
+bottom: -22px;
+left: 88%;
 }
