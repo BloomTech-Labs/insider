@@ -3,6 +3,7 @@ import { StripeProvider } from 'react-stripe-elements';
 import axios from 'axios';
 
 import Checkout from './stripe/Elements';
+import { parseNumber, formatNumber,isValidNumber } from 'libphonenumber-js'
 
 const apiURI =
   process.env.NODE_ENV === 'development'
@@ -87,7 +88,16 @@ export default class MessageFeed extends Component {
   };
 
   validatePhone = recipient => {
+    
+    const isOne = recipient.startsWith("+1")
+    const phoneN = isOne ? isValidNumber(recipient) : isValidNumber({ phone: recipient, country: 'US' })
+    console.log(phoneN)
+    if (!isOne)this.setState({recipient: `+1${recipient}`})
+    if(phoneN){
     this.setState({ validPhone: true });
+    }else{
+      this.setState({ validPhone: false });
+    }
   };
 
   sendForm = () => {
@@ -99,7 +109,7 @@ export default class MessageFeed extends Component {
     if (
       message !== '' &&
       recipient !== '' &&
-      // validPhone &&
+      validPhone &&
       token !== undefined
     ) {
       this.loadingStatus('loading');
