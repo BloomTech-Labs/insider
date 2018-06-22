@@ -62,7 +62,7 @@ class _CardForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="text-center">
         <CardElement
           style={{ base: { fontSize: '18px' } }}
           onChange={element => this.isComplete(element)}
