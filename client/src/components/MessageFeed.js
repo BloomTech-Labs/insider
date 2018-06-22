@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const apiURI = 'https://limitless-refuge-43765.herokuapp.com/api/';
 const messages = 'recent-messages';
+
 type State = {
   messages: Array<mixed>
 }
