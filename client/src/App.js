@@ -38,11 +38,11 @@ class App extends Component {
             <div className="icons">
               <Route path="/" exact component={Icons} />
             </div>
-            <div className="row">
+            <div>
               <Route
                 path="/"
                 exact
-                render={props => (
+                render={() => (
                   <MessageForm
                     updateParentState={this.updateParentState}
                     loadingState={this.state}
@@ -50,8 +50,8 @@ class App extends Component {
                 )}
               /></div>
 
-            <div className="row">
-              <h4> Recent Activity </h4>
+            <div>
+              <h2> Recent Activity </h2>
               <Route path="/" exact component={MessageFeed} />
 
 
