@@ -90,8 +90,6 @@ export default class MessageFeed extends Component {
   validatePhone = recipient => {
     
     const isOne = recipient.startsWith("+1")
-   
-   
     const phoneN = isOne ? isValidNumber(recipient) : isValidNumber({ phone: recipient, country: 'US' })
     console.log(phoneN)
     if (!isOne)this.setState({recipient: `+1${recipient}`})
