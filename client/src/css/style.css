@@ -15,6 +15,12 @@ body {
 .StripeElement {
   margin: 20px 0;
 }
+.button-control {
+  width: 100%;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
+}
 .btn-light {
   background-color: #5576FF;
   color: white;
@@ -58,7 +64,7 @@ h2 {
   margin-bottom: 10px;
 }
 ::placeholder {
-  color: lightgray;
+  color: #bdbdbd;
 }
 .send-message,
 .message-feed {

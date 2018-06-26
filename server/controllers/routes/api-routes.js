@@ -16,6 +16,8 @@ const { stripeAuth, sendSMS } = require('../../models/models');
 // const User = require('../models/user-model');
 // const Message = require('../models/message-model');
 
+
+// Stripe POST api call
 server.post('/send', (req, res) => {
   const { token } = req.body;
   const { message, recipient } = req.body;
@@ -30,8 +32,9 @@ server.post('/send', (req, res) => {
     .catch(error => res.status(SERVER_ERROR).json({ error }));
 });
 
+// Twilio GET api call (10 last messages)
 server.get('/recent-messages', (req, res) => {
-  const { TWILIO_TOKEN, TWILIO_SID } = process.env;
+  const { TWILIO_TOKEN, TWILIO_SID } = process.env; 
   const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
   const limit = 10;
   const arr = [];
