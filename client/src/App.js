@@ -4,13 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MessageForm from './components/MessageForm';
 import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
-import Icons from './components/Icons';
-
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faStroopwafel);
 
 class App extends Component {
   state = {

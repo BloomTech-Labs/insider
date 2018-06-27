@@ -1,17 +1,12 @@
-const {
-  TWILIO_FROM,
-  STRIPE_KEY,
-  TWILIO_TOKEN,
-  TWILIO_SID,
-} = process.env;
+const { TWILIO_FROM, STRIPE_KEY, TWILIO_TOKEN, TWILIO_SID } = process.env;
 
 const Twilio = require('twilio');
 const stripe = require('stripe')(STRIPE_KEY);
 // const URI_YESTERDAY = config.URIs.yesterday;
 // const URI_CURRENT = config.URIs.current;
 
-const stripeAuth = (token) => { // eslint-disable-line 
-  return new Promise((resolve, reject) => { // eslint-disable-line 
+const stripeAuth = (token) => { // eslint-disable-line
+  return new Promise((resolve, reject) => { // eslint-disable-line
     return stripe.charges
       .create({
         amount: '0100',
@@ -20,7 +15,9 @@ const stripeAuth = (token) => { // eslint-disable-line
         source: token,
       })
       .then(response => resolve(response))
-      .catch(err => reject(err));
+      .catch((err) => {
+        reject(err);
+      });
   }).catch(err => err);
 };
 

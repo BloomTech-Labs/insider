@@ -10,7 +10,6 @@ const STATUS_USER_ERROR = 422;
 
 // Checks to see if the proper API keys are in the .env file
 const envCheck = (req, res, next) => { // eslint-disable-line 
-  console.log(TWILIO_FROM,TWILIO_SID,TWILIO_TOKEN,STRIPE_KEY)
   if (
     TWILIO_SID !== undefined &&
     TWILIO_TOKEN !== undefined &&

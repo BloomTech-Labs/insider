@@ -107,7 +107,7 @@ export default class MessageFeed extends Component {
   };
 
   sendForm = () => {
-    const { message, recipient, token, validPhone } = this.state;
+    const { message, recipient, token } = this.state;
     this.loadingStatus('loading');
 
     const isValid = this.validatePhone(recipient);
