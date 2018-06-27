@@ -1,4 +1,4 @@
-![Ghost Texts Logo](https://github.com/Lambda-School-Labs/insider/blob/master/client/public/images/ghost_texts_blue.svg)
+![Ghost Texts Logo](https://github.com/Lambda-School-Labs/insider/blob/documentation/client/public/images/ghost_texts_blue.png)
 
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 
