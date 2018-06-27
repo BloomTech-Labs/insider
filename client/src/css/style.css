@@ -58,14 +58,14 @@ h2 {
   margin-bottom: 10px;
 }
 ::placeholder {
-  color: lightgray;
+  color: #bdbdbd;
 }
 .send-message,
 .message-feed {
   background-color: #FEFEFF;
   font-size: .85rem;
-  width: 100%;
-  max-width: 500px;
+  width: 500px;
+  max-width: 100%;
   border: solid 1px lightgray;
   padding: 30px;
   border-radius: 5px;
