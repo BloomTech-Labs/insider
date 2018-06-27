@@ -25,6 +25,7 @@ export default class MessageFeed extends Component {
     this.setState({ token });
   };
 
+  //Loading modal switch cases
   loadingStatus = (status, message) => {
     const { updateParentState } = this.props;
     switch (status) {
@@ -85,6 +86,8 @@ export default class MessageFeed extends Component {
         });
     }
   };
+
+ /*  Phone number validation. If the number fulfills the criteria in newRec then it is used in sendForm as the isValid var.  */ 
   validatePhone = recipient => {
     console.log(this.state)
     const countryCode = recipient.startsWith('+1' || '1');
@@ -108,13 +111,14 @@ export default class MessageFeed extends Component {
     this.loadingStatus('loading');
 
     const isValid = this.validatePhone(recipient);
-
+    // if the input fields fulfill these conditions of no null message or recipient, no undefined token and returns true in isValid
     if (
       message !== '' &&
       recipient !== '' &&
       token !== undefined &&
       isValid
     ) {
+      // show the loadingStatus modal popup and return an axios POST with the message,recipient and token
       this.loadingStatus('loading');
       return axios
         .post(apiURI + send, {
@@ -122,6 +126,7 @@ export default class MessageFeed extends Component {
           recipient,
           token: token.id,
         })
+        // if successful show the confirmed loadingStatus modal popup and instantiate a blank state 
         .then(res => {
           console.log(res);
           this.loadingStatus('confirmed');
@@ -131,6 +136,7 @@ export default class MessageFeed extends Component {
             token: '',
           });
         })
+        // if error show the error loadingStatus modal with the proper error message, check internet connection is the default msg.
         .catch(error => {
           console.error(error);
           if (error.message) {
@@ -142,6 +148,7 @@ export default class MessageFeed extends Component {
           }
         });
     } else {
+      // handles the invalid phone number error msg. and empty message error cases
       if ((message === '' && recipient === '') || ( message === '' && !isValid)) {
         this.loadingStatus('error', [
           'Please enter a valid phone number.',
