@@ -17,7 +17,7 @@ if (process.env.DEV !== 'development') {
   });
 }
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3030;
 
 app.listen(PORT, () => {
   console.log(`Magic happening on port ${PORT}`);
