@@ -25,22 +25,6 @@ const envCheck = (req, res, next) => { // eslint-disable-line
   }
 };
 
-// May be used still, but will need to be moved to a different file as it doesn't work as middleware
-const inputCheck = (req, res, next) => { // eslint-disable-line 
-  const { token } = req.body;
-  const { message, recipient } = req.body.message;
-  if (message !== undefined && recipient !== undefined) {
-    return res.status(STATUS_USER_ERROR).json({
-      error: 'Please type in your phone number and message.',
-    });
-  } else if (token === undefined) {
-    return res.status(STATUS_USER_ERROR).json({
-      error: 'Your credit card did not process, please try again',
-    });
-  }
-  next();
-};
 module.exports = {
   envCheck,
-  inputCheck,
 };

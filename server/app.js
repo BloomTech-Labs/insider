@@ -6,16 +6,6 @@ const app = require('./server');
 
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect(
-//   process.env.URI,
-//   {},
-//   (err) => {
-//     if (err) throw new Error(err);
-//     console.log('DB up and running');
-//   },
-// );
-
 // Serve static files from the React app
 if (process.env.DEV !== 'development') {
   app.use(express.static(path.join(__dirname, '../client/build')));
