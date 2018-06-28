@@ -6,16 +6,6 @@ const app = require('./server');
 
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect(
-//   process.env.URI,
-//   {},
-//   (err) => {
-//     if (err) throw new Error(err);
-//     console.log('DB up and running');
-//   },
-// );
-
 // Serve static files from the React app
 if (process.env.DEV !== 'development') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -23,11 +13,11 @@ if (process.env.DEV !== 'development') {
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    res.status(404).sendFile(path.join(__dirname, '../client/build/index.html'));
   });
 }
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3030;
 
 app.listen(PORT, () => {
   console.log(`Magic happening on port ${PORT}`);

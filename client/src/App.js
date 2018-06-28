@@ -44,7 +44,7 @@ class App extends Component {
         </div>
         <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
         <Router>
-          <div>
+          <div className="col-container">
             <div>
               <Route
                 path="/"
