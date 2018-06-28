@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MessageForm from './components/MessageForm';
 import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
+import Footer from './components/Footer';
 
 class App extends Component {
   state = {
@@ -31,9 +32,6 @@ class App extends Component {
             />
           </a>
           <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li className="nav-item active">
-        <a className="nav-link" href="#">About</a>
-      </li>
       <li className="nav-item">
         <a className="nav-link" href="#">Contact</a>
       </li>
@@ -67,6 +65,7 @@ class App extends Component {
           </div>
         </Router>
       </div>
+      <Footer />
       </div>
     );
   }
