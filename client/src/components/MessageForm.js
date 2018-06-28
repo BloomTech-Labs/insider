@@ -13,8 +13,7 @@ const send = 'send';
 
 export default class MessageFeed extends Component {
   // Constructor not needed in React 16
-  state = {
-    // eslint-disable-line
+  state = { // eslint-disable-line
     recipient: '',
     message: '',
     token: '',

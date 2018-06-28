@@ -49,7 +49,13 @@ server.get('/recent-messages', (req, res) => {
   const limit = 10;
   const arr = [];
   client.messages.each({ limit }, (msg) => {
-    arr.push(msg);
+    const { dateCreated, body, sid } = msg;
+    const message = {
+      body,
+      dateCreated,
+      sid,
+    }
+    arr.push(message);
     if (arr.length === limit) res.status(STATUS_SUCCESS).json(arr);
   });
 });
