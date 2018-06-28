@@ -12,7 +12,8 @@
     "react-fontawesome": "^1.6.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "react-stripe-elements": "^2.0.0"
+    "react-stripe-elements": "^2.0.0",
+    "sinon": "^6.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "flow": "^0.2.3",
     "flow-bin": "^0.74.0",
     "less-watch-compiler": "^1.11.3",
