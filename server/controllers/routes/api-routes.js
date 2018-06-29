@@ -55,7 +55,6 @@ server.get('/recent-messages', (req, res) => {
   const arr = [];
   // Uses Twilio's built in function to get recent messages
   client.messages.each({ limit }, (msg) => {
-    console.log('message', msg);
     const { dateCreated, body, sid } = msg;
     const message = {
       body,

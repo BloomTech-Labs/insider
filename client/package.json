@@ -5,7 +5,9 @@
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.1.0",
     "axios": "^0.18.0",
+    "emoji-js": "^3.4.1",
     "emoji-mart": "^2.6.1",
+    "emoji-picker-react": "^2.0.4",
     "libphonenumber-js": "^1.2.15",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
