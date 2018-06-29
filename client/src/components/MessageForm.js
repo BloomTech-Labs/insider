@@ -196,11 +196,12 @@ export default class MessageFeed extends Component {
           />
           <label htmlFor="message">Message</label>
           <div class="input-group mb-3">
-            <input
+            <textarea
               name="message"
               className="message-form form-control"
               onChange={this.handleInput}
               value={this.state.message}
+              rows="2"
               placeholder="Write your message here..."
             />
             <div class="input-group-append">
