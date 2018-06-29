@@ -10,12 +10,13 @@ type State = {
 }
 export default class MessageFeed extends Component<State> {
   state = { // eslint-disable-line no-named-as-default
-    messages: []
+    messages: [],
+    loaded: 'hide'
   };
   getMessages = () => {
     axios.get(apiURI + messages)
     .then(({ data }) => {
-      this.setState({ messages: data })
+      this.setState({ messages: data, loaded: 'show'  });
     }).catch(err => console.log(err))
   }
 
@@ -25,11 +26,11 @@ export default class MessageFeed extends Component<State> {
 
   render() {
     return (
-      <div className="message-feed" >
+      <div className={`message-feed ${this.state.loaded}`}>
         {this.state.messages.map((message) => {
           return (
             <Message
-              //time={message.dateCreated}
+              loaded={this.state.loaded}
               body={message.body}
               key={message.sid}
             />

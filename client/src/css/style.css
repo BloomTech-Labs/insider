@@ -147,6 +147,16 @@ input::placeholder {
   margin-bottom: 30px;
   text-align: left;
 }
+.message-feed.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 1s, opacity 1s;
+}
+.message-feed.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 1s, opacity 1s;
+}
 .message-feed {
   color: white;
 }

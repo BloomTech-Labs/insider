@@ -7,7 +7,7 @@ type Props = {
 };
 const Message = (props: Props) => {
   return (
-    <div className="message d-flex">
+    <div className={`message d-flex`}>
       <h4>{props.time}</h4>
       <p>{props.body}</p>
     </div>
