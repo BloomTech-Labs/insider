@@ -30,8 +30,9 @@ class App extends Component {
         <div className="row">
           <img id="logo" src="/images/ghost_texts_blue.svg" alt="Ghost Texts Logo" />
         </div>
-        <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
         <Router>
+          <div>
+        <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
           <div className="col-container">
             <div>
               <Route
@@ -48,6 +49,7 @@ class App extends Component {
             <Route path="/" exact component={MessageFeed} />
             {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}
+          </div>
           </div>
         </Router>
       </div>
