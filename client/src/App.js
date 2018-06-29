@@ -45,8 +45,6 @@ class App extends Component {
                 )}
               />
             </div>
-
-            <h2 className="text-center">Recent Activity</h2>
             <Route path="/" exact component={MessageFeed} />
             {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}
