@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.1.0",
-    "autosize": "^4.0.2",
     "axios": "^0.18.0",
     "emoji-js": "^3.4.1",
     "emoji-mart": "^2.6.1",
