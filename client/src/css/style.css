@@ -71,7 +71,7 @@ h2 {
 .navbar a {
   color: white;
 }
-@media (max-width: 991.98px) {
+@media only screen and (max-width: 575.98px) {
   .navbar a {
     padding-top: 0;
     font-size: 1.75rem;
