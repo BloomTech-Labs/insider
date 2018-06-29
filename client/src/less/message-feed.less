@@ -6,12 +6,18 @@
   border: solid 1px lightgray;
   padding: 30px;
   border-radius: 5px;
-	margin-bottom: 30px;
-  text-align:left;
-  
-  @media @smartphones, @tablets {
-  width: 400px;
-  }
+  margin-bottom: 30px;
+  text-align: left;
+}
+.message-feed.show {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 1s, opacity 1s;
+}
+.message-feed.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 1s, opacity 1s;
 }
 .message-feed {
   color: white;

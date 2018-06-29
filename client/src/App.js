@@ -5,6 +5,7 @@ import MessageForm from './components/MessageForm';
 import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
 import Footer from './components/Footer';
+import Header from './components/Header';
 
 class App extends Component {
   state = {
@@ -23,20 +24,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-sm">
-          <a className="navbar-brand" href="#">
-            <img
-              id="white-logo"
-              src="/images/ghost-texts-heavy.svg"
-              alt="White Logo"
-            />
-          </a>
-          <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li className="nav-item">
-        <a className="nav-link" href="#">Contact</a>
-      </li>
-      </ul>
-        </nav>
+      <Header />
       <div className="container align-items-center d-flex flex-column">
         <Loading state={this.state} />
         <div className="row">
@@ -57,8 +45,6 @@ class App extends Component {
                 )}
               />
             </div>
-
-            <h2 className="text-center">Recent Activity</h2>
             <Route path="/" exact component={MessageFeed} />
             {/* <Route path="/about" exact component={AboutUs} />
             <Route path="/contact" exact component={Contact} /> */}

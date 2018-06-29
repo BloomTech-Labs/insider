@@ -177,7 +177,7 @@ export default class MessageFeed extends Component {
             name="recipient"
             onChange={this.handleInput}
             value={this.state.recipient}
-            placeholder="number"
+            placeholder="+1 555 555 5555"
           />
           <label htmlFor="message">Message</label>
           <input
@@ -185,7 +185,7 @@ export default class MessageFeed extends Component {
             className="message-form form-control"
             onChange={this.handleInput}
             value={this.state.message}
-            placeholder="text"
+            placeholder="Write your message here..."
           />
           <StripeProvider apiKey="pk_test_N3kloqdrQMet0yDqnXGzsxR0">
             <Checkout
