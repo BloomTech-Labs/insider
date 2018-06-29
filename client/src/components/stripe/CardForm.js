@@ -15,7 +15,6 @@ class _CardForm extends React.Component {
         complete: true,
       });
     } else if (element.error !== undefined) {
-      console.log(element.error);
       this.setState({
         complete: false,
       });
