@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -10,7 +11,10 @@ const Footer = () => {
           alt="Lambda logo"
         />
         <span>●</span>
-        <a href="/contact">Contact us</a>
+        <Link
+            to='/devs'
+            className='add-contact'
+          >Contact us</Link>
       </div>
     </div>
   );

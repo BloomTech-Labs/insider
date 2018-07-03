@@ -1,6 +1,6 @@
 import React from 'react';
-
-const Footer = () => {
+import { Link } from 'react-router-dom'
+const Header = () => {
   return (
     <nav className="navbar navbar-expand-sm sticky-top">
       <div className="container">
@@ -13,13 +13,14 @@ const Footer = () => {
         </a>
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
           <li className="nav-item">
-            <a className="nav-link" href="/contact">
+            {/*<a className="nav-link" href="/contact">
               Contact The Team
-            </a>
+              </a>*/}
+            <Link to="/devs">Contact us</Link>  
           </li>
         </ul>
       </div>
     </nav>
   );
 };
-export default Footer;
+export default Header;
