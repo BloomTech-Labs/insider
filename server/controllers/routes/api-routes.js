@@ -17,7 +17,7 @@ const { stripeAuth, sendSMS, messagesFeed } = require('../../models/models');
 // waits for CC auth and then sends on the message
 // content to Twilio if CC Auth is successful.
 if (process.env.DEV !== 'development') {
-  express.get('*', (req, res) => {
+  server.get('*', (req, res) => {
     messagesFeed();
     res
       .status(STATUS_SUCCESS)
