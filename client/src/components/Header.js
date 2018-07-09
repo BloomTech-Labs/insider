@@ -16,7 +16,7 @@ const Header = () => {
             {/*<a className="nav-link" href="/contact">
               Contact The Team
               </a>*/}
-            <Link to="/devs">Contact us</Link>  
+            <Link to="/devs2">Contact us</Link>  
           </li>
         </ul>
       </div>

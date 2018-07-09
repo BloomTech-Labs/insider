@@ -62,6 +62,7 @@ server.get('/recent-messages', (req, res) => {
       sid,
     };
     arr.push(message);
+    {console.log(arr,message)}
     if (arr.length === limit) res.status(STATUS_SUCCESS).json(arr);
   });
 });

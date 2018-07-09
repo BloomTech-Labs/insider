@@ -12,7 +12,7 @@ const Footer = () => {
         />
         <span>●</span>
         <Link
-            to='/devs'
+            to='/devs2'
             className='add-contact'
           >Contact us</Link>
       </div>
