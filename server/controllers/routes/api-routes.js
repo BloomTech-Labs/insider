@@ -15,12 +15,6 @@ const { stripeAuth, sendSMS, messagesFeed } = require('../../models/models');
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-server.get('*', (req, res) => {
-  messagesFeed();
-  res
-    .status(STATUS_SUCCESS)
-    .sendFile(path.join(__dirname, '../client/build/index.html'));
-});
 
 // Handles POST api call, sends token to Stripe
 // waits for CC auth and then sends on the message
