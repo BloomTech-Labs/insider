@@ -13,18 +13,18 @@ const SERVER_ERROR = 500;
 
 const { stripeAuth, sendSMS, messagesFeed } = require('../../models/models');
 
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+server.get('*', (req, res) => {
+  messagesFeed();
+  res
+    .status(STATUS_SUCCESS)
+    .sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 // Handles POST api call, sends token to Stripe
 // waits for CC auth and then sends on the message
 // content to Twilio if CC Auth is successful.
-if (process.env.DEV !== 'development') {
-  server.get('*', (req, res) => {
-    messagesFeed();
-    res
-      .status(STATUS_SUCCESS)
-      .sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
-
 server.post('/send', (req, res) => {
   const { token } = req.body;
   const { message, recipient } = req.body;

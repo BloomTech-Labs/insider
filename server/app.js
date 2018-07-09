@@ -1,10 +1,8 @@
 require('dotenv').config();
 
 const fs = require('fs');
-const express = require('express');
-
+const path = require('path');
 const { server, io } = require('./server');
-const { messagesFeed } = require('./models/models');
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
 // Serve static files from the React app
@@ -20,7 +18,7 @@ io.sockets.on('connection', (socket) => {
       },
     );
   };
-  
+
   sendMessages();
   fs.watch(
     path.join(__dirname, '../server/models/messages/messages.json'),
