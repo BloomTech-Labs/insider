@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express')();
 const cors = require('cors');
 
 const apiRoutes = require('./controllers/routes/api-routes');
@@ -9,11 +9,15 @@ const corsOptions = {
   credentials: true,
 };
 
-const server = express();
-
-server.use(cors(corsOptions));
+express.use(cors(corsOptions));
 
 // You can add in any routes you want as you import them
-server.use('/api', envCheck, apiRoutes);
+express.use('/api', envCheck, apiRoutes);
 
-module.exports = server;
+const server = require('http').Server(express);
+const io = require('socket.io')(server);
+
+module.exports = {
+  server,
+  io,
+};

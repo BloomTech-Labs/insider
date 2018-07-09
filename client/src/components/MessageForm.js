@@ -195,7 +195,7 @@ export default class MessageFeed extends Component {
             placeholder="+1 555 555 5555"
           />
           <label htmlFor="message">Message</label>
-          <div class="input-group mb-3">
+          <div className="input-group mb-3">
             <textarea
               name="message"
               className="message-form form-control"
@@ -204,8 +204,8 @@ export default class MessageFeed extends Component {
               rows="2"
               placeholder="Write your message here..."
             />
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon1">
+            <div className="input-group-append">
+                <span className="input-group-text" id="basic-addon1">
                 <a onClick={this.showEmoji} className="smile-emoji">
                 {String.fromCodePoint(0x1F600)}
                 </a>

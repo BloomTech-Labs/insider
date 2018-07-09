@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Message from './Message';
 import axios from 'axios';
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:3030/');
 
-const apiURI = 'https://limitless-refuge-43765.herokuapp.com/api/';
+const apiURI = 'http://localhost:3030/api/';
 const messages = 'recent-messages';
 
 type State = {
@@ -24,6 +26,9 @@ export default class MessageFeed extends Component<State> {
   };
 
   componentDidMount() {
+    socket.on('message-feed', (data) => {
+      console.log(data);
+    });
     this.getMessages();
   }
 

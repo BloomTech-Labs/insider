@@ -16,6 +16,7 @@
     "react-scripts": "1.1.4",
     "react-stripe-elements": "^2.0.0",
     "sinon": "^6.0.1",
+    "socket.io-client": "^2.1.1",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
