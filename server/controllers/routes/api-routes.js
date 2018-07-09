@@ -1,7 +1,6 @@
 const express = require('express');
 const Twilio = require('twilio');
 const morgan = require('morgan');
-const path = require('path');
 
 const server = express();
 server.use(morgan('combined'));

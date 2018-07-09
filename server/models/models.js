@@ -56,7 +56,7 @@ const messagesFeed = () => {
         if (err) {
           return console.log(err);
         }
-        return 'messages saved';
+        console.log('messages saved');
       });
     }
   });
