@@ -14,7 +14,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')), apiRoutes);
 
 // You can add in any routes you want as you import them
 app.use('/api', envCheck, apiRoutes);
