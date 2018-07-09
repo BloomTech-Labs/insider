@@ -15,6 +15,7 @@ if (process.env.DEV !== 'development') {
   // The "catchall" handler: for any request that doesn't
   // match one above, send back React's index.html file.
   server.get('*', (req, res) => {
+    messagesFeed();
     res
       .status(404)
       .sendFile(path.join(__dirname, '../client/build/index.html'));
@@ -22,9 +23,6 @@ if (process.env.DEV !== 'development') {
 }
 
 io.sockets.on('connection', (socket) => {
-  let counter = 0;
-  counter++;
-  console.log(counter);
   const sendMessages = () => {
     fs.readFile(
       path.join(__dirname, '../server/models/messages/messages.json'),
@@ -48,7 +46,6 @@ io.sockets.on('connection', (socket) => {
 const PORT = process.env.PORT || 3030;
 
 server.listen(PORT, () => {
-  messagesFeed();
   console.log(`Listening on port: ${PORT}`);
 });
 
