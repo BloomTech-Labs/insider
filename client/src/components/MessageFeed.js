@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Message from './Message';
 import axios from 'axios';
 import io from 'socket.io-client';
-const socket = io.connect('http://localhost:3030/');
+const socket = io.connect('http://localhost:3030');
 
 const apiURI = 'http://localhost:3030/api/';
 const messages = 'recent-messages';
@@ -27,9 +27,14 @@ export default class MessageFeed extends Component<State> {
 
   componentDidMount() {
     socket.on('message-feed', (data) => {
-      console.log(data);
+      if (data != undefined && data != null) {
+      const json = JSON.parse(data);
+        const { messages } = json;
+        console.log(messages);
+        this.setState({ messages, loaded: 'show' });
+      }
     });
-    this.getMessages();
+    // this.getMessages();
   }
 
   render() {

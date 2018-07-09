@@ -2,11 +2,13 @@ const { TWILIO_FROM, STRIPE_KEY, TWILIO_TOKEN, TWILIO_SID } = process.env;
 
 const Twilio = require('twilio');
 const stripe = require('stripe')(STRIPE_KEY);
-// const URI_YESTERDAY = config.URIs.yesterday;
-// const URI_CURRENT = config.URIs.current;
+const fs = require('fs');
+const path = require('path');
 
-const stripeAuth = (token) => { // eslint-disable-line
-  return new Promise((resolve, reject) => { // eslint-disable-line
+const stripeAuth = (token) => {
+  // eslint-disable-line
+  return new Promise((resolve, reject) => {
+    // eslint-disable-line
     return stripe.charges
       .create({
         amount: '0100',
@@ -32,8 +34,36 @@ const sendSMS = (message, recipient) => {
     .then(response => response)
     .catch(err => err);
 };
+const messagesFeed = () => {
+  const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
+  const limit = 10;
+  const arr = {
+    messages: [],
+  };
+
+  client.messages.each({ limit }, (msg) => {
+    const { dateCreated, body, sid } = msg;
+    const message = {
+      body,
+      dateCreated,
+      sid,
+    };
+    arr.messages.push(message);
+    if (arr.messages.length === limit) {
+      const content = JSON.stringify(arr);
+      const filePath = path.join(__dirname, '/messages/', 'messages.json');
+      fs.writeFile(filePath, content, 'utf8', (err) => {
+        if (err) {
+          return console.log(err);
+        }
+        return 'messages saved';
+      });
+    }
+  });
+};
 
 module.exports = {
   sendSMS,
   stripeAuth,
+  messagesFeed,
 };

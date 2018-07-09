@@ -1,8 +1,11 @@
 require('dotenv').config();
 
+const fs = require('fs');
 const express = require('express');
 const path = require('path');
+
 const { server, io } = require('./server');
+const { messagesFeed } = require('./models/models');
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
 // Serve static files from the React app
@@ -18,14 +21,34 @@ if (process.env.DEV !== 'development') {
   });
 }
 
-const PORT = process.env.PORT || 3030;
-
 io.sockets.on('connection', (socket) => {
-  console.log('someone connected');
-  socket.emit('message-feed', { message: 'Cow goes moo' });
+  let counter = 0;
+  counter++;
+  console.log(counter);
+  const sendMessages = () => {
+    fs.readFile(
+      path.join(__dirname, '../server/models/messages/messages.json'),
+      'utf8',
+      (err, data) => {
+        if (err) console.log(err);
+        socket.emit('message-feed', data);
+      },
+    );
+  };
+  
+  sendMessages();
+  fs.watch(
+    path.join(__dirname, '../server/models/messages/messages.json'),
+    (event, targetfile) => {
+      sendMessages();
+    },
+  );
 });
 
+const PORT = process.env.PORT || 3030;
+
 server.listen(PORT, () => {
+  messagesFeed();
   console.log(`Listening on port: ${PORT}`);
 });
 
