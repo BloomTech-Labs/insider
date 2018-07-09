@@ -23,37 +23,41 @@ class App extends Component {
 
   render() {
     return (
+
+
       <div>
-      <Header />
-      <div className="container align-items-center d-flex flex-column">
-        <Loading state={this.state} />
-        <div className="row">
-          <img id="logo" src="/images/ghost_texts_blue.svg" alt="Ghost Texts Logo" />
-        </div>
-        <Router>
-          <div>
-        <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
-          <div className="col-container">
+        <Header />
+     
+        <div className="container align-items-center d-flex flex-column">
+          <Loading state={this.state} />
+          <div className="row">
+            <img id="logo" src="/images/ghost_texts_blue.svg" alt="Ghost Texts Logo" />
+          </div>
+          <Router>
             <div>
-              <Route
-                path="/"
-                exact
-                render={() => (
-                  <MessageForm
-                    updateParentState={this.updateParentState}
-                    loadingState={this.state}
+              <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
+              <div className="col-container">
+                <div>
+                  <Route
+                    path="/"
+                    exact
+                    render={() => (
+                      <MessageForm
+                        updateParentState={this.updateParentState}
+                        loadingState={this.state}
+                      />
+                    )}
                   />
-                )}
-              />
+                </div>
+                
+                <Route exact path="/" component={MessageFeed} />
+                {/* <Route path="/about" exact component={AboutUs} />*/}
+
+              </div>
             </div>
-            <Route path="/" exact component={MessageFeed} />
-            {/* <Route path="/about" exact component={AboutUs} />
-            <Route path="/contact" exact component={Contact} /> */}
-          </div>
-          </div>
-        </Router>
-      </div>
-      <Footer />
+          </Router>
+        </div>
+        <Footer />
       </div>
     );
   }
