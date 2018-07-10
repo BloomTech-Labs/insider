@@ -14,7 +14,6 @@ io.sockets.on('connection', (socket) => {
       'utf8',
       (err, data) => {
         if (err) console.log(err);
-        console.log(data)
         socket.emit('message-feed', data);
       },
     );
@@ -24,7 +23,6 @@ io.sockets.on('connection', (socket) => {
   fs.watch(
     path.join(__dirname, './models/messages/messages.json'),
     (event, targetfile) => {
-      console.log(event);
       sendMessages();
     },
   );
