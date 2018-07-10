@@ -51,7 +51,7 @@ server.post('/send', (req, res) => {
 });
 
 server.post('/twilio-status', (req, res) => {
-  console.log(req.body);
+  console.log(req);
 });
 
 // Twilio GET api call (10 last messages)
