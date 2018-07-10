@@ -43,7 +43,6 @@ server.post('/send', (req, res) => {
           res
             .status(STATUS_SUCCESS)
             .json({ success: 'Your message was successfully sent.' });
-          setTimeout(messagesFeed(), 3000);
         }
       });
     })
@@ -51,7 +50,13 @@ server.post('/send', (req, res) => {
 });
 
 server.post('/twilio-status', (req, res) => {
-  console.log(req);
+  const { MessageStatus } = req.body;
+  if (MessageStatus !== null || MessageStatus !== undefined) {
+    if (MessageStatus === 'delivered') {
+      messagesFeed();
+      console.log(req.body);
+    }
+  }
 });
 
 // Twilio GET api call (10 last messages)
