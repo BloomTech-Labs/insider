@@ -52,9 +52,9 @@ const messagesFeed = () => {
     if (arr.messages.length === limit) {
       const content = JSON.stringify(arr);
       const filePath = path.join(__dirname, '/messages/', 'messages.json');
-      fs.writeFile(filePath, content, 'utf8', (err) => {
+      fs.writeFile(filePath, content, (err) => {
         if (err) {
-          return console.log(err);
+          console.error(err);
         }
         console.log('messages saved');
       });
