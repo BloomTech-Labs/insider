@@ -25,7 +25,6 @@ if (process.env.DEV !== 'development') {
       .sendFile(path.join(__dirname, '../client/build/index.html'));
   });
 }
-
 // You can add in any routes you want as you import them
 app.use('/api', envCheck, apiRoutes);
 

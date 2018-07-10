@@ -1,5 +1,4 @@
 const express = require('express');
-const Twilio = require('twilio');
 const morgan = require('morgan');
 
 const server = express();
