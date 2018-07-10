@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Message from './Message';
 import io from 'socket.io-client';
-const socket = io.connect('https://anonymous-texts.herokuapp.com/');
+const socket = io.connect('https://limitless-refuge-43765.herokuapp.com/');
 
 type State = {
   messages: Array<mixed>,
