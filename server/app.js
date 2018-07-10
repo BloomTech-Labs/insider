@@ -15,7 +15,7 @@ io.sockets.on('connection', (socket) => {
       path.join(__dirname, './models/messages/messages.json'),
       'utf8',
       (err, data) => {
-        if (err) console.log(err);
+        if (err) socket.emit('socket-error', err);
         socket.emit('message-feed', data);
       },
     );
@@ -24,8 +24,8 @@ io.sockets.on('connection', (socket) => {
   sendMessages();
   fs.watch(
     path.join(__dirname, './models/messages/messages.json'),
-    (event, targetfile) => {
-      sendMessages();
+    (event) => {
+      if (event === 'change') sendMessages();
     },
   );
 });
@@ -33,7 +33,6 @@ io.sockets.on('connection', (socket) => {
 const PORT = process.env.PORT || 3030;
 
 server.listen(PORT, () => {
-  messagesFeed();
   console.log(`Listening on port: ${PORT}`);
 });
 

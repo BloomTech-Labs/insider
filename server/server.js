@@ -15,16 +15,17 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-if (process.env.DEV !== 'development') {
-  app.use(express.static(path.join(__dirname, '../client/build')), apiRoutes);
 
-  app.get('*', (req, res) => {
-    messagesFeed();
-    res
-      .status(200)
-      .sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
+// if (process.env.DEV !== 'development') {
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+  messagesFeed();
+  res
+    .status(200)
+    .sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+// }
 // You can add in any routes you want as you import them
 app.use('/api', envCheck, apiRoutes);
 
