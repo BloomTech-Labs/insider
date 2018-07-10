@@ -40,14 +40,18 @@ server.post('/send', (req, res) => {
         if (data.status > 204) {
           res.status(data.status).json({ error: data.message });
         } else {
-          messagesFeed();
           res
             .status(STATUS_SUCCESS)
             .json({ success: 'Your message was successfully sent.' });
+          setTimeout(messagesFeed(), 3000);
         }
       });
     })
     .catch(error => res.status(SERVER_ERROR).json({ error }));
+});
+
+server.post('/twilio-status', (req, res) => {
+  console.log(req.body);
 });
 
 // Twilio GET api call (10 last messages)

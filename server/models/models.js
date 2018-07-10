@@ -18,13 +18,9 @@ const stripeAuth = (token) => {
       })
       .then(response => resolve(response))
       .catch((err) => {
-        console.error(err);
         reject(err);
       });
-  }).catch((err) => {
-    console.error(err);
-    return err;
-  });
+  }).catch(err => err);
 };
 
 const sendSMS = (message, recipient) => {
@@ -34,15 +30,10 @@ const sendSMS = (message, recipient) => {
       body: message,
       to: recipient,
       from: TWILIO_FROM,
+      statusCallback: 'https://anonymous-texts.herokuapp.com/api/twilio-status/',
     })
-    .then((response) => {
-      console.log(response);
-      return response;
-    })
-    .catch((err) => {
-      console.error(err);
-      return err;
-    });
+    .then(response => response)
+    .catch(err => err);
 };
 const messagesFeed = () => {
   const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
