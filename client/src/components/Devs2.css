@@ -1,0 +1,27 @@
+.Devs2 {
+    margin: 80px;
+  }
+  .Header {
+    color: #443e3e;
+    text-shadow: 1px 1px 5px #fff;
+  }
+  .Collapsible { 
+    color: green;
+    margin: 5px; 
+    padding: 5px; 
+  } 
+  
+  .Collapsible__trigger { 
+    cursor: pointer; 
+  } 
+  .Collapsible__contentInner{ 
+    background-color: blue; 
+    color: yellow; 
+    opacity: none;
+    border: 2px solid grey; 
+    padding: 20px; 
+    margin-top: 5px; 
+  }
+  u {
+    text-decoration: underline;
+}
