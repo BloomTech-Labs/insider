@@ -52,12 +52,12 @@ server.post('/send', (req, res) => {
 server.post('/twilio-status', (req, res) => {
   const { MessageStatus } = req.body;
   if (MessageStatus !== null || MessageStatus !== undefined) {
-    if (MessageStatus === 'delivered') {
+    if (MessageStatus === 'sent') {
       messagesFeed();
       console.log(req.body);
-      res.status(200);
-    } else res.status(200);
-  }
+      res.status(200).end();
+    } 
+  } else res.status(200).end();
 });
 
 module.exports = server;
