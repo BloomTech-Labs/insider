@@ -18,9 +18,13 @@ const stripeAuth = (token) => {
       })
       .then(response => resolve(response))
       .catch((err) => {
+        console.error(err);
         reject(err);
       });
-  }).catch(err => err);
+  }).catch((err) => {
+    console.error(err);
+    return err;
+  });
 };
 
 const sendSMS = (message, recipient) => {
@@ -31,8 +35,14 @@ const sendSMS = (message, recipient) => {
       to: recipient,
       from: TWILIO_FROM,
     })
-    .then(response => response)
-    .catch(err => err);
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((err) => {
+      console.error(err);
+      return err;
+    });
 };
 const messagesFeed = () => {
   const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
