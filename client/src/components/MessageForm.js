@@ -10,7 +10,7 @@ import { isValidNumber } from 'libphonenumber-js';
 const apiURI =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3030/api/'
-    : 'https://anonymous-texts.herokuapp.com/';
+    : 'https://limitless-refuge-43765.herokuapp.com/api/';
 const send = 'send';
 
 export default class MessageFeed extends Component {
