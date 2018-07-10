@@ -35,6 +35,7 @@ const sendSMS = (message, recipient) => {
     .then(response => response)
     .catch(err => err);
 };
+
 const messagesFeed = () => {
   const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
   const limit = 10;

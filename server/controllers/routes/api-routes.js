@@ -55,29 +55,9 @@ server.post('/twilio-status', (req, res) => {
     if (MessageStatus === 'delivered') {
       messagesFeed();
       console.log(req.body);
-    }
+      res.status(200);
+    } else res.status(200);
   }
 });
-
-// Twilio GET api call (10 last messages)
-// server.get('/recent-messages', (req, res) => {
-
-// const { TWILIO_TOKEN, TWILIO_SID } = process.env;
-// const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
-// const limit = 10;
-// const arr = [];
-// // Uses Twilio's built in function to get recent messages
-// client.messages.each({ limit }, (msg) => {
-//   const { dateCreated, body, sid } = msg;
-//   const message = {
-//     body,
-//     dateCreated,
-//     sid,
-//   };
-//   arr.push(message);
-//   if (arr.length === limit) res.status(STATUS_SUCCESS).json(arr);
-
-// });
-// });
 
 module.exports = server;

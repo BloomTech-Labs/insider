@@ -20,7 +20,6 @@ if (process.env.DEV !== 'development') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 
   app.get('*', (req, res) => {
-    messagesFeed();
     res
       .status(200)
       .sendFile(path.join(__dirname, '../client/build/index.html'));
