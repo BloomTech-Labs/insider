@@ -1,5 +1,4 @@
 const express = require('express');
-const Twilio = require('twilio');
 const morgan = require('morgan');
 
 const server = express();
@@ -10,7 +9,10 @@ server.use(express.json());
 const STATUS_SUCCESS = 200;
 const SERVER_ERROR = 500;
 
-const { stripeAuth, sendSMS } = require('../../models/models');
+const { stripeAuth, sendSMS, messagesFeed } = require('../../models/models');
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
 
 // Handles POST api call, sends token to Stripe
 // waits for CC auth and then sends on the message
@@ -38,8 +40,9 @@ server.post('/send', (req, res) => {
         if (data.status > 204) {
           res.status(data.status).json({ error: data.message });
         } else {
+          messagesFeed();
           res
-            .status(200)
+            .status(STATUS_SUCCESS)
             .json({ success: 'Your message was successfully sent.' });
         }
       });
@@ -48,23 +51,24 @@ server.post('/send', (req, res) => {
 });
 
 // Twilio GET api call (10 last messages)
-server.get('/recent-messages', (req, res) => {
-  const { TWILIO_TOKEN, TWILIO_SID } = process.env;
-  const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
-  const limit = 10;
-  const arr = [];
-  // Uses Twilio's built in function to get recent messages
-  client.messages.each({ limit }, (msg) => {
-    const { dateCreated, body, sid } = msg;
-    const message = {
-      body,
-      dateCreated,
-      sid,
-    };
-    arr.push(message);
-    {console.log(arr,message)}
-    if (arr.length === limit) res.status(STATUS_SUCCESS).json(arr);
-  });
-});
+// server.get('/recent-messages', (req, res) => {
+
+// const { TWILIO_TOKEN, TWILIO_SID } = process.env;
+// const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
+// const limit = 10;
+// const arr = [];
+// // Uses Twilio's built in function to get recent messages
+// client.messages.each({ limit }, (msg) => {
+//   const { dateCreated, body, sid } = msg;
+//   const message = {
+//     body,
+//     dateCreated,
+//     sid,
+//   };
+//   arr.push(message);
+//   if (arr.length === limit) res.status(STATUS_SUCCESS).json(arr);
+
+// });
+// });
 
 module.exports = server;

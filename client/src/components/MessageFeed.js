@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Message from './Message';
-import axios from 'axios';
-
-const apiURI = 'https://limitless-refuge-43765.herokuapp.com/api/';
-const messages = 'recent-messages';
+import io from 'socket.io-client';
+const socket = io.connect('https://anonymous-texts.herokuapp.com/');
 
 type State = {
   messages: Array<mixed>,
@@ -14,17 +12,25 @@ export default class MessageFeed extends Component<State> {
     messages: [],
     loaded: 'hide',
   };
-  getMessages = () => {
-    axios
-      .get(apiURI + messages)
-      .then(({ data }) => {
-        this.setState({ messages: data, loaded: 'show' });
-      })
-      .catch(err => console.log(err));
-  };
+  // getMessages = () => {
+  //   axios
+  //     .get(apiURI + messages)
+  //     .then(({ data }) => {
+  //       this.setState({ messages: data, loaded: 'show' });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   componentDidMount() {
-    this.getMessages();
+    socket.on('message-feed', (data) => {
+      if (data !== undefined && data !== null) {
+      const json = JSON.parse(data);
+        const { messages } = json;
+        console.log(messages);
+        this.setState({ messages, loaded: 'show' });
+      }
+    });
+    // this.getMessages();
   }
 
   render() {

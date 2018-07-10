@@ -1,19 +1,37 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+
+const app = express();
 
 const apiRoutes = require('./controllers/routes/api-routes');
 const { envCheck } = require('./models/middleware/middleware');
+
+const { messagesFeed } = require('./models/models');
 
 const corsOptions = {
   origin: '*',
   credentials: true,
 };
 
-const server = express();
+app.use(cors(corsOptions));
+if (process.env.DEV !== 'development') {
+  app.use(express.static(path.join(__dirname, '../client/build')), apiRoutes);
 
-server.use(cors(corsOptions));
-
+  app.get('*', (req, res) => {
+    messagesFeed();
+    res
+      .status(200)
+      .sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+}
 // You can add in any routes you want as you import them
-server.use('/api', envCheck, apiRoutes);
+app.use('/api', envCheck, apiRoutes);
 
-module.exports = server;
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+module.exports = {
+  server,
+  io,
+};

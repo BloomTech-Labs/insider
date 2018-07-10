@@ -1,26 +1,40 @@
 require('dotenv').config();
 
-const express = require('express');
+const fs = require('fs');
 const path = require('path');
-const app = require('./server');
-
+const { server, io } = require('./server');
+const { messagesFeed } = require('./models/models');
 // Imports server.js and app.js creates a connection containing the routes and middleware
 
 // Serve static files from the React app
-if (process.env.DEV !== 'development') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
 
-  // The "catchall" handler: for any request that doesn't
-  // match one above, send back React's index.html file.
-  app.get('*', (req, res) => {
-    res.status(404).sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
-}
+io.sockets.on('connection', (socket) => {
+  messagesFeed();
+  const sendMessages = () => {
+    fs.readFile(
+      path.join(__dirname, './models/messages/messages.json'),
+      'utf8',
+      (err, data) => {
+        if (err) console.log(err);
+        socket.emit('message-feed', data);
+      },
+    );
+  };
+
+  sendMessages();
+  fs.watch(
+    path.join(__dirname, './models/messages/messages.json'),
+    (event, targetfile) => {
+      sendMessages();
+    },
+  );
+});
 
 const PORT = process.env.PORT || 3030;
 
-app.listen(PORT, () => {
-  console.log(`Magic happening on port ${PORT}`);
+server.listen(PORT, () => {
+  messagesFeed();
+  console.log(`Listening on port: ${PORT}`);
 });
 
-module.exports = app;
+module.exports = server;
