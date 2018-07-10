@@ -9,7 +9,7 @@ server.use(express.json());
 const STATUS_SUCCESS = 200;
 const SERVER_ERROR = 500;
 
-const { stripeAuth, sendSMS, messagesFeed } = require('../../models/models');
+const { stripeAuth, sendSMS } = require('../../models/models');
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
@@ -47,17 +47,6 @@ server.post('/send', (req, res) => {
       });
     })
     .catch(error => res.status(SERVER_ERROR).json({ error }));
-});
-
-server.post('/twilio-status', (req, res) => {
-  const { MessageStatus } = req.body;
-  if (MessageStatus !== null || MessageStatus !== undefined) {
-    if (MessageStatus === 'sent') {
-      messagesFeed();
-      console.log(req.body);
-      res.status(200).end();
-    } 
-  } else res.status(200).end();
 });
 
 module.exports = server;
