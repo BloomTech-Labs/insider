@@ -44,10 +44,9 @@ const messagesFeed = () => {
   };
   return new Promise((resolve, reject) => {
     return client.messages.each({ limit }, (msg) => {
-      const { dateCreated, body, sid } = msg;
+      const { body, sid } = msg;
       const message = {
         body,
-        dateCreated,
         sid,
       };
       arr.messages.push(message);
