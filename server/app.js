@@ -9,8 +9,8 @@ const { messagesFeed } = require('./models/models');
 // Serve static files from the React app
 
 io.sockets.on('connection', (socket) => {
-  messagesFeed();
   const sendMessages = () => {
+    console.log('messages sent');
     fs.readFile(
       path.join(__dirname, './models/messages/messages.json'),
       'utf8',
@@ -21,13 +21,15 @@ io.sockets.on('connection', (socket) => {
     );
   };
 
-  sendMessages();
-  fs.watch(
-    path.join(__dirname, './models/messages/messages.json'),
-    (event) => {
-      if (event === 'change') sendMessages();
-    },
-  );
+  messagesFeed()
+    .then(() => sendMessages())
+    .catch((err) => {
+      sendMessages();
+      console.error(err);
+    });
+  fs.watch(path.join(__dirname, './models/messages/messages.json'), (event) => {
+    if (event === 'change') sendMessages();
+  });
 });
 
 const PORT = process.env.PORT || 3030;

@@ -13,7 +13,7 @@ const Header = () => {
         </a>
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
           <li className="nav-item">
-            <a className="nav-link" href="/contact">
+            <a className="nav-link" href="/devs2">
               Contact The Team
               </a>
             {/* <Link to="/devs2">Contact us</Link>   */}
