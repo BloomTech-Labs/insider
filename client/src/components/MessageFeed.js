@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 const apiURI =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3030/'
-    : 'https://anonymous-texts.herokuapp.com/';
+    : 'https://limitless-refuge-43765.herokuapp.com/';
 const socket = io(apiURI);
 
 type State = {
