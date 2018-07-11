@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-// import Collapsible from 'react-collapsible';
+import Collapsible from 'react-collapsible';
 import './Devs2.css'
+
+import Footer from './Footer'
+import Header from './Header';
 class Devs2 extends Component {
 
     dev = [
@@ -66,24 +69,28 @@ class Devs2 extends Component {
         return(
          
             <div className="Devs2">
-            <h1 className="Header">The Team</h1>
+            <Header />
+            
             
             <ul>
-              {/* {this.dev.map(character => (
+              {this.dev.map(character => (
                  
                 <Collapsible key={character.id}trigger="" open={true} >
-                    <li>{character.name}</li>
-                    <li><img width={120} height={80} src={character.picture}/></li>
-                    <li>Email: {this.cipher(character.email)}</li>
+                    <h1>{character.name}</h1>
+                    <img width={100} height={100} src={character.picture}/>
+                    Email: {this.cipher(character.email)}
                    
     
                   
                 </Collapsible>
-              ))} */}
+              ))} 
             </ul>
+            <Footer/>
           </div>
+         
         );
       }
+      
     }
     
     export default Devs2;

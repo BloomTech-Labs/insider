@@ -6,6 +6,7 @@ import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import Devs2 from './components/Devs2';
 
 class App extends Component {
   state = {
@@ -51,7 +52,7 @@ class App extends Component {
                 </div>
                 
                 <Route exact path="/" component={MessageFeed} />
-                {/* <Route path="/about" exact component={AboutUs} />*/}
+                <Route path="/devs2" component={Devs2} />*/}
 
               </div>
             </div>

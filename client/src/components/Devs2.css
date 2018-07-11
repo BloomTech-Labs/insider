@@ -1,9 +1,8 @@
-.Devs2 {
-    margin: 80px;
-  }
+
   .Header {
     color: #443e3e;
     text-shadow: 1px 1px 5px #fff;
+    margin-left: 25%;
   }
   .Collapsible { 
     color: green;
@@ -15,12 +14,19 @@
     cursor: pointer; 
   } 
   .Collapsible__contentInner{ 
-    background-color: blue; 
-    color: yellow; 
+    
+    width:50%;
+    overflow: auto;
+    background-color: #5576FF; 
+    color: white; 
     opacity: none;
     border: 2px solid grey; 
-    padding: 20px; 
-    margin-top: 5px; 
+    padding: 30px; 
+    margin-top: 50px; 
+    margin-left: 25%;
+  }
+  .Collapsible__contentInner img{
+    border-radius: 50%;
   }
   u {
     text-decoration: underline;
