@@ -22,7 +22,8 @@ io.sockets.on('connection', (socket) => {
   };
 
   messagesFeed()
-    .then(() => sendMessages())
+    .then(() => {})
+    .then(sendMessages())
     .catch((err) => {
       sendMessages();
       console.error(err);

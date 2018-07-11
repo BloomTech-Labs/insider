@@ -30,7 +30,7 @@ const sendSMS = (message, recipient) => {
       body: message,
       to: recipient,
       from: TWILIO_FROM,
-      statusCallback: 'https://anonymous-texts.herokuapp.com/api/twilio-status/',
+      statusCallback: 'https://limitless-refuge-43765.herokuapp.com/api/twilio-status/',
     })
     .then(response => response)
     .catch(err => err);
@@ -44,10 +44,9 @@ const messagesFeed = () => {
   };
   return new Promise((resolve, reject) => {
     return client.messages.each({ limit }, (msg) => {
-      const { dateCreated, body, sid } = msg;
+      const { body, sid } = msg;
       const message = {
         body,
-        dateCreated,
         sid,
       };
       arr.messages.push(message);

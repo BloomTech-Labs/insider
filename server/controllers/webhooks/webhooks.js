@@ -12,9 +12,15 @@ const { messagesFeed } = require('../../models/models');
 
 server.post('/twilio-status', (req, res) => {
   const { MessageStatus } = req.body;
-  if (MessageStatus === 'sent') {
+  // Responds to any status update AFTER the message is queued
+  if (
+    MessageStatus === 'sent' ||
+    MessageStatus === 'delivered' ||
+    MessageStatus === 'undelivered' ||
+    MessageStatus === 'failed'
+  ) {
+    console.log('message status', req.body);
     messagesFeed();
-    console.log(req.body);
   }
   res.sendStatus(STATUS_SUCCESS);
 });
