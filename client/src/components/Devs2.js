@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import Collapsible from 'react-collapsible';
+// import Collapsible from 'react-collapsible';
 import './Devs2.css'
 class Devs2 extends Component {
 
@@ -69,7 +69,7 @@ class Devs2 extends Component {
             <h1 className="Header">The Team</h1>
             
             <ul>
-              {this.dev.map(character => (
+              {/* {this.dev.map(character => (
                  
                 <Collapsible key={character.id}trigger="" open={true} >
                     <li>{character.name}</li>
@@ -79,7 +79,7 @@ class Devs2 extends Component {
     
                   
                 </Collapsible>
-              ))}
+              ))} */}
             </ul>
           </div>
         );

@@ -30,10 +30,12 @@ const sendSMS = (message, recipient) => {
       body: message,
       to: recipient,
       from: TWILIO_FROM,
+      statusCallback: 'https://limitless-refuge-43765.herokuapp.com/api/twilio-status/',
     })
     .then(response => response)
     .catch(err => err);
 };
+
 const messagesFeed = () => {
   const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
   const limit = 10;
@@ -52,9 +54,9 @@ const messagesFeed = () => {
     if (arr.messages.length === limit) {
       const content = JSON.stringify(arr);
       const filePath = path.join(__dirname, '/messages/', 'messages.json');
-      fs.writeFile(filePath, content, 'utf8', (err) => {
+      fs.writeFile(filePath, content, (err) => {
         if (err) {
-          return console.log(err);
+          console.error(err);
         }
         console.log('messages saved');
       });
