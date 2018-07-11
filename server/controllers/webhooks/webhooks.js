@@ -12,7 +12,7 @@ const { messagesFeed } = require('../../models/models');
 
 server.post('/twilio-status', (req, res) => {
   const { MessageStatus } = req.body;
-  if (MessageStatus !== undefined && MessageStatus === 'sent') {
+  if (MessageStatus !== undefined && MessageStatus === 'queued') {
     messagesFeed();
     console.log(req.body);
   }
