@@ -10,7 +10,6 @@ const { messagesFeed } = require('./models/models');
 
 io.sockets.on('connection', (socket) => {
   const sendMessages = () => {
-    console.log('messages sent');
     fs.readFile(
       path.join(__dirname, './models/messages/messages.json'),
       'utf8',

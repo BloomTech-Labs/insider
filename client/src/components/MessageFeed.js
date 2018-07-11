@@ -23,7 +23,6 @@ export default class MessageFeed extends Component<State> {
       if (data !== undefined && data !== null) {
       const json = JSON.parse(data);
         const { messages } = json;
-        console.log(messages);
         this.setState({ messages, loaded: 'show' });
       }
     });

@@ -58,7 +58,6 @@ const messagesFeed = () => {
             console.error(err);
             return reject(err);
           }
-          console.log('messages saved');
           return resolve('messages saved');
         });
       }
