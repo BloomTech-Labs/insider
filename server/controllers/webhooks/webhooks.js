@@ -20,7 +20,6 @@ server.post('/twilio-status', (req, res) => {
     MessageStatus === 'undelivered' ||
     MessageStatus === 'failed'
   ) {
-    console.log('message status', req.body);
     messagesFeed();
   }
 });
