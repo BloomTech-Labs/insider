@@ -9,8 +9,6 @@ const webHooks = require('./controllers/webhooks/webhooks');
 
 const { envCheck } = require('./models/middleware/middleware');
 
-const { messagesFeed } = require('./models/models');
-
 const corsOptions = {
   origin: '*',
   credentials: true,

@@ -42,25 +42,28 @@ const messagesFeed = () => {
   const arr = {
     messages: [],
   };
-
-  client.messages.each({ limit }, (msg) => {
-    const { dateCreated, body, sid } = msg;
-    const message = {
-      body,
-      dateCreated,
-      sid,
-    };
-    arr.messages.push(message);
-    if (arr.messages.length === limit) {
-      const content = JSON.stringify(arr);
-      const filePath = path.join(__dirname, '/messages/', 'messages.json');
-      fs.writeFile(filePath, content, (err) => {
-        if (err) {
-          console.error(err);
-        }
-        console.log('messages saved');
-      });
-    }
+  return new Promise((resolve, reject) => {
+    return client.messages.each({ limit }, (msg) => {
+      const { dateCreated, body, sid } = msg;
+      const message = {
+        body,
+        dateCreated,
+        sid,
+      };
+      arr.messages.push(message);
+      if (arr.messages.length === limit) {
+        const content = JSON.stringify(arr);
+        const filePath = path.join(__dirname, '/messages/', 'messages.json');
+        fs.writeFile(filePath, content, (err) => {
+          if (err) {
+            console.error(err);
+            return reject(err);
+          }
+          console.log('messages saved');
+          return resolve('messages saved');
+        });
+      }
+    });
   });
 };
 
