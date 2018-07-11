@@ -10,19 +10,19 @@ const { messagesFeed } = require('./models/models');
 
 io.sockets.on('connection', (socket) => {
   const sendMessages = () => {
+    console.log('messages sent');
     fs.readFile(
       path.join(__dirname, './models/messages/messages.json'),
       'utf8',
       (err, data) => {
         if (err) socket.emit('socket-error', err);
         socket.emit('message-feed', data);
-      }
+      },
     );
   };
 
   messagesFeed()
-    .then(() => {})
-    .then(sendMessages)
+    .then(() => sendMessages())
     .catch((err) => {
       sendMessages();
       console.error(err);
