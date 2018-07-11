@@ -17,14 +17,6 @@ export default class MessageFeed extends Component<State> {
     messages: [],
     loaded: 'hide',
   };
-  // getMessages = () => {
-  //   axios
-  //     .get(apiURI + messages)
-  //     .then(({ data }) => {
-  //       this.setState({ messages: data, loaded: 'show' });
-  //     })
-  //     .catch(err => console.log(err));
-  // };
 
   componentDidMount() {
     socket.on('message-feed', (data) => {
@@ -35,7 +27,6 @@ export default class MessageFeed extends Component<State> {
         this.setState({ messages, loaded: 'show' });
       }
     });
-    // this.getMessages();
   }
 
   render() {
