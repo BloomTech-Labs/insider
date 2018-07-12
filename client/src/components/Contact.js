@@ -13,7 +13,7 @@ const Contact = () => {
     },
     {
       id: 'peter',
-      name: 'Peter Grey',
+      name: 'Peter Gray',
       email: 'peter@petergraycreative.com',
       github: 'https://github.com/PeterGrayCreative',
       linkedin: 'https://www.linkedin.com/in/petergraycreative/',
