@@ -268,4 +268,7 @@ a.smile-emoji {
     tranform: rotate(360deg);
   }
 }
+.developer a {
+  display: block;
+}
 /*# sourceMappingURL=style.css.map */

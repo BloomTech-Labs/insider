@@ -5,18 +5,39 @@ class EmailAddress extends Component {
   state = {
     cipher: true,
     email: '',
+    linkText: '',
+    linkType: '',
   };
 
   componentDidMount() {
-    this.setState({ email: this.props.email });
+    // this.setState({ email: this.props.email });
     const { email } = this.props;
-    const cipher = this.rot13(email);
+    this.rot13(email);
+    this.setLinkType();
   }
 
+  setLinkType = () => {
+    const { linkText } = this.props;
+    console.log(this.props);
+    let type;
+    let link;
+    if (linkText) {
+      if (linkText.hasOwnProperty('email')) {
+        type = 'email';
+        link = this.state.email;
+      } else if (linkText.hasOwnProperty('text')) {
+        type = 'text';
+        link = linkText.text;
+      }
+    } else {
+      type = 'default';
+      link = 'Email Now';
+    }
+    this.setState({ linkText: link, linkType: type });
+  };
+
   splitEmail = email => {
-    return email.split('').map(char => {
-      return char;
-    });
+    return email.split('');
   };
 
   unRot13 = email => {
@@ -66,9 +87,9 @@ class EmailAddress extends Component {
   };
 
   handleCipher = () => {
-    if (this.state.cipher) {
-      this.unRot13(this.state.email);
-    } else this.rot13(this.state.email);
+    return this.state.cipher
+      ? this.unRot13(this.state.email)
+      : this.rot13(this.state.email);
   };
 
   render() {
@@ -79,7 +100,10 @@ class EmailAddress extends Component {
             onMouseEnter={this.handleCipher}
             onMouseLeave={this.handleCipher}
           >
-            {this.state.email}
+            {(this.state.linkType === 'text' ||
+              this.state.linkType === 'default') &&
+              this.state.linkText}
+            {this.state.linkType === 'email' && this.state.email}
           </div>
         </a>
       </div>
@@ -88,7 +112,7 @@ class EmailAddress extends Component {
 }
 
 EmailAddress.propTypes = {
-  email: PropTypes.string
+  email: PropTypes.string,
 };
 
 export default EmailAddress;
