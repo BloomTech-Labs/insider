@@ -271,12 +271,16 @@ a.smile-emoji {
     tranform: rotate(360deg);
   }
 }
+.developer {
+  text-align: center;
+}
 .developer a {
   display: block;
 }
 .developer img {
   width: 100%;
   margin: 10px 0;
+  border-radius: 100px;
 }
 .developer h3 {
   font-weight: bold;
