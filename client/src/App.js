@@ -52,7 +52,7 @@ class App extends Component {
                 </div>
                 
                 <Route exact path="/" component={MessageFeed} />
-                <Route path="/devs2" component={Devs2} />*/}
+                <Route path="/devs2" component={Devs2} />
 
               </div>
             </div>
