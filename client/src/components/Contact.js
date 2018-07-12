@@ -9,7 +9,7 @@ const Contact = () => {
       email: 'anthonycatalfo@yahoo.com',
       github: '',
       linkedin: '',
-      picture: 'https://ca.slack-edge.com/T4JUEB3ME-U8CBJCJ7K-d19907ad71bb-72',
+      picture: 'anthony-catalfo.png',
     },
     {
       id: 'peter',
@@ -17,7 +17,7 @@ const Contact = () => {
       email: 'peter@petergraycreative.com',
       github: 'https://github.com/PeterGrayCreative',
       linkedin: 'https://www.linkedin.com/in/petergraycreative/',
-      picture: 'https://ca.slack-edge.com/T4JUEB3ME-U7P5N0KEC-5c660ff183b4-48',
+      picture: 'peter-gray.jpg',
     },
     {
       id: 'richard',
@@ -25,19 +25,19 @@ const Contact = () => {
       email: 'richardreis@yahoo.com',
       github: '',
       linkedin: '',
-      picture: 'https://ca.slack-edge.com/T4JUEB3ME-U7J9CUMU2-2749fb51b912-48',
+      picture: 'richard-reis.jpg',
     },
     {
       id: 'igor',
       name: 'Igor Yermak',
       email: 'igoryermak@yahoo.com',
       github: '',
-      linkedin: '',
-      picture: 'https://ca.slack-edge.com/T4JUEB3ME-U6PLJKDC1-9f8ccee199de-48',
+      linkedin: 'https://www.linkedin.com/in/igoryermak/',
+      picture: 'igor-yermak.jpg',
     },
   ];
   return (
-    <div className="row d-flex flex-row justify-content-center">
+    <div className="row d-flex flex-row dev-block">
       {team.map((member) => {
         const {
           id,
@@ -49,12 +49,12 @@ const Contact = () => {
         } = member;
 
         return (
-          <div className="developer" key={id}>
-            <h1>{name}</h1>
-            <img alt={name} width={100} height={100} src={picture} />
+          <div className="developer col-6 col-lg-3" key={id}>
+            <img alt={name} src={`/images/${picture}`} />
+            <h3>{name}</h3>
             <a href={github}>Github</a>
             <a href={linkedin}>LinkedIn</a>
-            <EmailAddress email={email} linkText={{ text: 'Email Now' }} />
+            <EmailAddress email={email} linkText={{ text: 'Email' }} />
           </div>
         );
       })}

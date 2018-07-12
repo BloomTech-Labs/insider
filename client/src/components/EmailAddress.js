@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class EmailAddress extends Component {
-  state = {
-    cipher: true,
-    email: '',
-    linkText: '',
-    linkType: '',
-  };
+  constructor() {
+    super();
+    this.state = {
+      cipher: true,
+      email: '',
+      linkText: '',
+      linkType: '',
+    };
+  }
 
   componentDidMount() {
     // this.setState({ email: this.props.email });

@@ -24,10 +24,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="d-flex flex-column page-container">
         <Header />
 
-        <div className="container align-items-center d-flex flex-column">
+        <div style={{ flex: '1'}} className="container align-items-center d-flex flex-column">
           <Loading state={this.state} />
           <div className="row">
             <img

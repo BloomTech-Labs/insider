@@ -8,6 +8,9 @@ body {
   padding: 0;
   color: #5576FF;
 }
+.page-container {
+  min-height: 100vh;
+}
 .nav-link:hover {
   text-decoration: underline;
 }
@@ -270,5 +273,16 @@ a.smile-emoji {
 }
 .developer a {
   display: block;
+}
+.developer img {
+  width: 100%;
+  margin: 10px 0;
+}
+.developer h3 {
+  font-weight: bold;
+  font-size: 1.35rem;
+}
+.dev-block {
+  margin-top: 40px;
 }
 /*# sourceMappingURL=style.css.map */
