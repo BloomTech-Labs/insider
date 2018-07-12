@@ -20,14 +20,26 @@
     background-color: #5576FF; 
     color: white; 
     opacity: none;
-    border: 2px solid grey; 
+    border: 1px solid rgb(79, 106, 211); 
     padding: 30px; 
     margin-top: 50px; 
     margin-left: 25%;
   }
   .Collapsible__contentInner img{
     border-radius: 50%;
+    
+  }
+  h1{
+    padding: 5px;
   }
   u {
     text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+  .Collapsible__contentInner{
+    margin: 20px;
+    padding: 25px;
+    width: 100%;
+  }
 }
