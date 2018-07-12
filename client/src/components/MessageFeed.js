@@ -33,7 +33,7 @@ export default class MessageFeed extends Component<State> {
 
   render() {
     return (
-      <div>
+      <div className="col-container">
         <h2 className="text-center">Recent Activity</h2>
         <div className={`message-feed ${this.state.loaded}`}>
           {this.state.messages.map(message => {

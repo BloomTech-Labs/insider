@@ -6,7 +6,7 @@ import MessageFeed from './components/MessageFeed';
 import Loading from './components/Loading';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import Devs2 from './components/Devs2';
+import Contact from './components/Contact';
 
 class App extends Component {
   state = {
@@ -24,21 +24,23 @@ class App extends Component {
 
   render() {
     return (
-
-
       <div>
         <Header />
-     
+
         <div className="container align-items-center d-flex flex-column">
           <Loading state={this.state} />
           <div className="row">
-            <img id="logo" src="/images/ghost_texts_blue.svg" alt="Ghost Texts Logo" />
+            <img
+              id="logo"
+              src="/images/ghost_texts_blue.svg"
+              alt="Ghost Texts Logo"
+            />
           </div>
           <Router>
             <div>
-              <h1 className="text-center">Send an anonymous text message to anyone for $1</h1>
-              <div className="col-container">
-                <div>
+              <h1 className="text-center">
+                Send an anonymous text message to anyone for $1
+              </h1>
                   <Route
                     path="/"
                     exact
@@ -49,13 +51,9 @@ class App extends Component {
                       />
                     )}
                   />
-                </div>
-                
                 <Route exact path="/" component={MessageFeed} />
-                <Route path="/devs2" component={Devs2} />*/}
-
+                <Route path="/contact" component={Contact} />
               </div>
-            </div>
           </Router>
         </div>
         <Footer />

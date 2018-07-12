@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter,Switch,Route } from 'react-router-dom'
-
-import Devs2 from './components/Devs2';
 import './css/bootstrap-reboot.min.css';
 import './css/bootstrap-grid.min.css';
 import './css/bootstrap.min.css';
@@ -12,13 +9,7 @@ import App from './App';
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-<BrowserRouter>
-       <Switch>
-          <Route exact path="/"   component={App} />
-          <Route exact path="/devs2"   component={Devs2} /> 
-        </Switch>
-</BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 registerServiceWorker();
 
