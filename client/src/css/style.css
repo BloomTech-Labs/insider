@@ -294,4 +294,9 @@ a.smile-emoji {
 .dev-block {
   margin-top: 40px;
 }
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .developer {
+    margin-bottom: 40px;
+  }
+}
 /*# sourceMappingURL=style.css.map */
