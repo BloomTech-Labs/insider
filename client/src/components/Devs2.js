@@ -4,7 +4,7 @@ import Collapsible from 'react-collapsible';
 import './Devs2.css'
 class Devs2 extends Component {
 
-    dev = [
+     dev = [
         {
             id: 'anthony',
             name: 'Anthony Catalfo',
