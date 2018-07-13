@@ -30,7 +30,7 @@ const sendSMS = (message, recipient) => {
       body: message,
       to: recipient,
       from: TWILIO_FROM,
-      statusCallback: 'http://www.ghosttexts.com/api/twilio-status/',
+      statusCallback: '//www.ghosttexts.com/api/twilio-status/',
     })
     .then(response => response)
     .catch(err => err);

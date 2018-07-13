@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 const apiURI =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3030/'
-    : 'http://www.ghosttexts.com/';
+    : '//www.ghosttexts.com/';
 const socket = io(apiURI);
 
 type State = {
