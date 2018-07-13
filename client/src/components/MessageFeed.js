@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 const apiURI =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3030/'
-    : 'https://limitless-refuge-43765.herokuapp.com/';
+    : '//www.ghosttexts.com/';
 const socket = io(apiURI);
 
 type State = {
@@ -33,7 +33,7 @@ export default class MessageFeed extends Component<State> {
 
   render() {
     return (
-      <div>
+      <div className="col-container">
         <h2 className="text-center">Recent Activity</h2>
         <div className={`message-feed ${this.state.loaded}`}>
           {this.state.messages.map(message => {

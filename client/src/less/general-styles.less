@@ -7,6 +7,9 @@ body {
   padding: 0;
   color: @logo-blue;
 }
+.page-container {
+  min-height: 100vh;
+}
 .nav-link:hover {
   text-decoration: underline;
 }
@@ -49,4 +52,9 @@ a {
 h1, h2 {
   margin-bottom:20px;
   font-size: 1.75rem;
+}
+h1 {
+  @media @smartphones {
+    margin-top: 40px;
+  }
 }
