@@ -1,5 +1,5 @@
 import React from 'react';
-import EmailAddress from './EmailAddress';
+import EmailAddress from 'react-bot-buster-email-obfuscation';
 
 const Contact = () => {
   const team = [
