@@ -30,7 +30,7 @@ const Contact = () => {
     {
       id: 'igor',
       name: 'Igor Yermak',
-      email: 'igoryermak@yahoo.com',
+      email: 'igor.yermak@yahoo.com',
       github: '',
       linkedin: 'https://www.linkedin.com/in/igoryermak/',
       picture: 'igor-yermak.jpg',
