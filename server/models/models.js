@@ -33,7 +33,7 @@ const sendSMS = (message, recipient) => {
       body: message,
       to: recipient,
       from: TWILIO_FROM,
-      statusCallback: 'http://www.ghosttexts.com/api/twilio-status/',
+      statusCallback: 'https://anonymous-texts.herokuapp.com/api/twilio-status/',
     })
     .then(response => response)
     .catch((err) => {
@@ -57,6 +57,7 @@ const messagesFeed = () => {
       };
       arr.messages.push(message);
       if (arr.messages.length === limit) {
+        console.log(arr);
         const content = JSON.stringify(arr);
         const filePath = path.join(__dirname, '/messages/', 'messages.json');
         fs.writeFile(filePath, content, (err) => {
