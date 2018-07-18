@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const fs = require('fs');
 const path = require('path');
+const chokidar = require('chokidar');
+
 const { server, io } = require('./server');
 const { messagesFeed } = require('./models/models');
 // Imports server.js and app.js creates a connection containing the routes and middleware
@@ -9,6 +11,7 @@ const { messagesFeed } = require('./models/models');
 // Serve static files from the React app
 
 io.sockets.on('connection', (socket) => {
+  const watcher = chokidar.watch(path.join(__dirname, './models/messages/messages.json'), { persistent: true });
   const sendMessages = () => {
     fs.readFile(
       path.join(__dirname, './models/messages/messages.json'),
@@ -28,10 +31,11 @@ io.sockets.on('connection', (socket) => {
       sendMessages();
       console.error(err);
     });
-  fs.watch(path.join(__dirname, './models/messages/messages.json'), (event, filename) => {
-    console.log(event, filename)
-    if (event === 'change') sendMessages();
-  });
+  watcher.on('change', sendMessages());
+  // fs.watch(path.join(__dirname, './models/messages/messages.json'), (event, filename) => {
+  //   console.log(event, filename)
+  //   if (event === 'change') sendMessages();
+  // });
 });
 
 const PORT = process.env.PORT || 3030;
