@@ -46,7 +46,7 @@ server.post('/send', (req, res) => {
         }
       });
     })
-    .catch(error => res.status(SERVER_ERROR).json({ error }));
+    .catch(error => res.status(SERVER_ERROR).json({ error: error.message }));
 });
 
 module.exports = server;

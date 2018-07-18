@@ -20,7 +20,10 @@ const stripeAuth = (token) => {
       .catch((err) => {
         reject(err);
       });
-  }).catch(err => err);
+  }).catch((err) => {
+    console.error(err);
+    return err;
+  });
 };
 
 const sendSMS = (message, recipient) => {
@@ -30,10 +33,13 @@ const sendSMS = (message, recipient) => {
       body: message,
       to: recipient,
       from: TWILIO_FROM,
-      statusCallback: '//www.ghosttexts.com/api/twilio-status/',
+      statusCallback: 'http://www.ghosttexts.com/api/twilio-status/',
     })
     .then(response => response)
-    .catch(err => err);
+    .catch((err) => {
+      console.error(err);
+      return err;
+    });
 };
 
 const messagesFeed = () => {

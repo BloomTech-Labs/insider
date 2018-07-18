@@ -134,7 +134,6 @@ export default class MessageFeed extends Component {
           })
           // if error show the error loadingStatus modal with the proper error message, check internet connection is the default msg.
           .catch(error => {
-            console.error(error);
             if (error.message) {
               this.loadingStatus('error', [error.message]);
             } else {
