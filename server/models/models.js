@@ -43,6 +43,8 @@ const sendSMS = (message, recipient) => {
 };
 
 const messagesFeed = () => {
+  const filePath = path.join(__dirname, '/messages/', 'messages.json');
+  const file = fs.createWriteStream(filePath);
   const client = new Twilio(TWILIO_SID, TWILIO_TOKEN);
   const limit = 10;
   const arr = {
@@ -59,14 +61,7 @@ const messagesFeed = () => {
       if (arr.messages.length === limit) {
         console.log(arr);
         const content = JSON.stringify(arr);
-        const filePath = path.join(__dirname, '/messages/', 'messages.json');
-        fs.writeFile(filePath, content, (err) => {
-          if (err) {
-            console.error(err);
-            return reject(err);
-          }
-          return resolve('messages saved');
-        });
+        file.write(content);
       }
     });
   });
