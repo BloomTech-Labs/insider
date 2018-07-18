@@ -31,7 +31,9 @@ io.sockets.on('connection', (socket) => {
       sendMessages();
       console.error(err);
     });
-  watcher.on('change', sendMessages());
+  watcher.on('change', (path, stats) => {
+    sendMessages()
+  });
   // fs.watch(path.join(__dirname, './models/messages/messages.json'), (event, filename) => {
   //   console.log(event, filename)
   //   if (event === 'change') sendMessages();
