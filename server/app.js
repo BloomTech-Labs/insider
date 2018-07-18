@@ -14,6 +14,7 @@ io.sockets.on('connection', (socket) => {
       path.join(__dirname, './models/messages/messages.json'),
       'utf8',
       (err, data) => {
+        console.log(data)
         if (err) socket.emit('socket-error', err);
         socket.emit('message-feed', data);
       },
