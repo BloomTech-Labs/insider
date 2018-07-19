@@ -11,30 +11,37 @@ const { messagesFeed } = require('./models/models');
 // Serve static files from the React app
 
 io.sockets.on('connection', (socket) => {
-  let streamData = '';
   const watcher = chokidar.watch(
     path.join(__dirname, './models/messages/messages.json'),
-    { persistent: true },
+    { persistent: true }
   );
   const sendMessages = () => {
-    const stream = fs.createReadStream(
+    fs.readFile(
       path.join(__dirname, './models/messages/messages.json'),
-      { encoding: 'base64' },
+      'base64',
+      (err, data) => {
+        if (err) socket.emit('socket-error', err);
+        const newData = `${data}*`;
+        socket.emit('message-feed', newData);
+      },
     );
-    stream.on('data', (data) => {
-      streamData += data;
-      stream.on('end', () => {
-        console.log(streamData)
-        socket.emit('message-feed', streamData);
-      });
-    });
+    //   const stream = fs.readFile(
+    //     path.join(__dirname, './models/messages/messages.json'),
+    //     { encoding: 'base64' },
+    //   );
+    //   stream.on('data', (data) => {
+    //     stream.on('end', () => {
+    //       const concat = data + '*';
+    //       socket.emit('message-feed', concat);
+    //     });
+    //   });
     // stream.on('end', (data) => {
     //   console.log('streamdata', streamData)
     //   socket.emit('message-feed', data);
     // });
-    stream.on('error', (err) => {
-      socket.emit('socket-error', err);
-    });
+    // stream.on('error', (err) => {
+    //   socket.emit('socket-error', err);
+    // });
   };
 
   messagesFeed()
