@@ -30,10 +30,6 @@ io.sockets.on('connection', (socket) => {
   watcher.on('change', () => {
     sendMessages();
   });
-  // fs.watch(path.join(__dirname, './models/messages/messages.json'), (event, filename) => {
-  //   console.log(event, filename)
-  //   if (event === 'change') sendMessages();
-  // });
 });
 
 const PORT = process.env.PORT || 3030;
