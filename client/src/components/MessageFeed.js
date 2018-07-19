@@ -23,7 +23,9 @@ export default class MessageFeed extends Component<State> {
  
   componentDidMount() {
     socket.on('message-feed', (data) => {
+      console.log(data)
       const decoded = this.b64DecodeUnicode(data);
+      console.log(decoded)
       if (data !== undefined && data !== null) {
       const json = JSON.parse(decoded);
         const { messages } = json;
