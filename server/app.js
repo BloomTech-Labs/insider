@@ -24,8 +24,9 @@ io.sockets.on('connection', (socket) => {
     stream.on('data', (data) => {
       streamData += data;
     });
-    stream.on('end', () => {
-      socket.emit('message-feed', streamData);
+    stream.on('end', (data) => {
+      console.log('streamdata', streamData)
+      socket.emit('message-feed', data);
     });
     stream.on('error', (err) => {
       socket.emit('socket-error', err);

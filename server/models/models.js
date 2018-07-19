@@ -60,7 +60,6 @@ const messagesFeed = () => {
       arr.messages.push(message);
       if (arr.messages.length === limit) {
         const content = JSON.stringify(arr);
-        console.log(content)
         file.write(content);
       }
     });
