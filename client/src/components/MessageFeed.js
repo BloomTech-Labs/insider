@@ -18,14 +18,13 @@ export default class MessageFeed extends Component<State> {
   b64DecodeUnicode(str) {
     return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-    }).join('')) + ']}';
+    }).join(''))
   }
  
   componentDidMount() {
     socket.on('message-feed', (data) => {
-      console.log(atob(data))
       const decoded = this.b64DecodeUnicode(data);
-      
+      console.log(decoded[decoded.length-1])
       if (data !== undefined && data !== null) {
       const json = JSON.parse(decoded);
         const { messages } = json;
