@@ -18,8 +18,9 @@ export default class MessageFeed extends Component<State> {
   componentDidMount() {
     socket.on('message-feed', (data) => {
       console.log(data)
+      const dataStore = data;
       if (data !== undefined && data !== null) {
-      const json = JSON.parse(data);
+      const json = JSON.parse(data.toString('utf8'));
         const { messages } = json;
         this.setState({ messages, loaded: 'show' });
       }

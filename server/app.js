@@ -13,9 +13,7 @@ const { messagesFeed } = require('./models/models');
 io.sockets.on('connection', (socket) => {
   const watcher = chokidar.watch(path.join(__dirname, './models/messages/messages.json'), { persistent: true });
   const sendMessages = () => {
-    fs.readFile(
-      path.join(__dirname, './models/messages/messages.json'),
-      'utf8',
+    fs.createReadStream(path.join(__dirname, './models/messages/messages.json'),
       (err, data) => {
         console.log(data)
         if (err) socket.emit('socket-error', err);
@@ -31,8 +29,8 @@ io.sockets.on('connection', (socket) => {
       sendMessages();
       console.error(err);
     });
-  watcher.on('change', (path, stats) => {
-    sendMessages()
+  watcher.on('change', () => {
+    sendMessages();
   });
   // fs.watch(path.join(__dirname, './models/messages/messages.json'), (event, filename) => {
   //   console.log(event, filename)
