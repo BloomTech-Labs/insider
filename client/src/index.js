@@ -7,11 +7,11 @@ import './css/style.css';
 import WebFont from 'webfontloader';
 import App from './App';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-registerServiceWorker();
+// registerServiceWorker();
 
 WebFont.load({
   google: {

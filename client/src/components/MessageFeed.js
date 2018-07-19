@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import Message from './Message';
 import io from 'socket.io-client';
 
-const apiURI =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3030/'
-    : '//www.ghosttexts.com/';
+const apiURI = '//www.ghosttexts.com/';
 const socket = io(apiURI);
 
 type State = {
@@ -20,8 +17,9 @@ export default class MessageFeed extends Component<State> {
 
   componentDidMount() {
     socket.on('message-feed', (data) => {
+      const decodedString = String.fromCharCode.apply(null, new Uint8Array(data));
       if (data !== undefined && data !== null) {
-      const json = JSON.parse(data);
+      const json = JSON.parse(decodedString);
         const { messages } = json;
         this.setState({ messages, loaded: 'show' });
       }
