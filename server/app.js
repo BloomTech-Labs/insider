@@ -15,9 +15,8 @@ io.sockets.on('connection', (socket) => {
   const sendMessages = () => {
     const stream = fs.createReadStream(path.join(__dirname, './models/messages/messages.json'));
     stream
-      .on('data', (chunk) => {
-        console.log(chunk);
-        socket.emit('message-feed', chunk);
+      .on('data', (data) => {
+        socket.emit('message-feed', data);
       });
   };
 
