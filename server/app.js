@@ -13,13 +13,12 @@ const { messagesFeed } = require('./models/models');
 io.sockets.on('connection', (socket) => {
   const watcher = chokidar.watch(path.join(__dirname, './models/messages/messages.json'), { persistent: true });
   const sendMessages = () => {
-    fs.createReadStream(path.join(__dirname, './models/messages/messages.json'),
-      (err, data) => {
-        console.log(data)
-        if (err) socket.emit('socket-error', err);
-        socket.emit('message-feed', data);
-      },
-    );
+    const stream = fs.createReadStream(path.join(__dirname, './models/messages/messages.json'));
+    stream
+      .on('data', (chunk) => {
+        console.log(chunk);
+        socket.emit('message-feed', chunk);
+      });
   };
 
   messagesFeed()

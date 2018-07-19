@@ -20,7 +20,7 @@ export default class MessageFeed extends Component<State> {
       console.log(data)
       const dataStore = data;
       if (data !== undefined && data !== null) {
-      const json = JSON.parse(data.toString('utf8'));
+      const json = JSON.parse(data);
         const { messages } = json;
         this.setState({ messages, loaded: 'show' });
       }
