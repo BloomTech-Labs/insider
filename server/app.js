@@ -11,13 +11,21 @@ const { messagesFeed } = require('./models/models');
 // Serve static files from the React app
 
 io.sockets.on('connection', (socket) => {
-  const watcher = chokidar.watch(path.join(__dirname, './models/messages/messages.json'), { persistent: true });
+  const watcher = chokidar.watch(
+    path.join(__dirname, './models/messages/messages.json'),
+    { persistent: true },
+  );
   const sendMessages = () => {
-    const stream = fs.createReadStream(path.join(__dirname, './models/messages/messages.json'));
-    stream
-      .on('data', (data) => {
-        socket.emit('message-feed', data);
-      });
+    const stream = fs.createReadStream(
+      path.join(__dirname, './models/messages/messages.json'),
+      { encoding: 'base64' },
+    );
+    stream.on('data', (data) => {
+      socket.emit('message-feed', data);
+    });
+    stream.on('error', (err) => {
+      socket.emit('socket-error', err);
+    });
   };
 
   messagesFeed()
