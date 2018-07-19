@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Message from './Message';
 import io from 'socket.io-client';
 
-const apiURI = 'https://anonymous-texts.herokuapp.com/';
+const apiURI = 'http://www.ghosttexts.com/';
 const socket = io(apiURI);
 
 type State = {
