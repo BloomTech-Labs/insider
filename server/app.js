@@ -16,12 +16,16 @@ io.sockets.on('connection', (socket) => {
     { persistent: true },
   );
   const sendMessages = () => {
+    let streamData;
     const stream = fs.createReadStream(
       path.join(__dirname, './models/messages/messages.json'),
       { encoding: 'base64' },
     );
     stream.on('data', (data) => {
-      socket.emit('message-feed', data);
+      streamData += data;
+    });
+    stream.on('end', () => {
+      socket.emit('message-feed', streamData);
     });
     stream.on('error', (err) => {
       socket.emit('socket-error', err);
