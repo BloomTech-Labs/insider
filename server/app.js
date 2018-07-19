@@ -16,7 +16,7 @@ io.sockets.on('connection', (socket) => {
     { persistent: true },
   );
   const sendMessages = () => {
-    let streamData;
+    var streamData;
     const stream = fs.createReadStream(
       path.join(__dirname, './models/messages/messages.json'),
       { encoding: 'base64' },
@@ -24,7 +24,7 @@ io.sockets.on('connection', (socket) => {
     stream.on('data', (data) => {
       streamData += data;
     });
-    stream.on('end', (data) => {
+    stream.on('finish', (data) => {
       console.log('streamdata', streamData)
       socket.emit('message-feed', data);
     });
