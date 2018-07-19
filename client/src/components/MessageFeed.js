@@ -23,8 +23,8 @@ export default class MessageFeed extends Component<State> {
  
   componentDidMount() {
     socket.on('message-feed', (data) => {
-      const decoded = this.b64DecodeUnicode(data);
-      console.log(decoded)
+      const decoded = this.b64DecodeUnicode(data) + ']}';
+      
       if (data !== undefined && data !== null) {
       const json = JSON.parse(decoded);
         const { messages } = json;
@@ -33,7 +33,7 @@ export default class MessageFeed extends Component<State> {
     });
     socket.on('socket-error', (data) => {
       console.error(data);
-    })
+    });
   }
 
   render() {
