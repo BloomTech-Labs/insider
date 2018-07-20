@@ -8,7 +8,7 @@ const Contact = () => {
       name: 'Anthony Catalfo',
       email: 'tonycatalfo@gmail.com',
       github: 'https://github.com/AnthonyCatalfo',
-      linkedin: '',
+      linkedin: 'https://www.linkedin.com/in/tony-catalfo-0073a1168/',
       picture: 'anthony-catalfo.png',
     },
     {
