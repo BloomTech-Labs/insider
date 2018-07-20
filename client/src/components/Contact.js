@@ -6,7 +6,7 @@ const Contact = () => {
     {
       id: 'anthony',
       name: 'Anthony Catalfo',
-      email: 'anthonycatalfo@yahoo.com',
+      email: 'tonycatalfo@gmail.com',
       github: 'https://github.com/AnthonyCatalfo',
       linkedin: 'https://www.linkedin.com/in/tony-catalfo-0073a1168/',
       picture: 'anthony-catalfo.png',
@@ -22,7 +22,7 @@ const Contact = () => {
     {
       id: 'richard',
       name: 'Richard Reis',
-      email: 'richardreis@yahoo.com',
+      email: 'richardreeze1@gmail.com',
       github: 'https://github.com/richardreeze',
       linkedin: 'https://www.linkedin.com/in/richardreeze/',
       picture: 'richard-reis.jpg',
@@ -30,7 +30,7 @@ const Contact = () => {
     {
       id: 'igor',
       name: 'Igor Yermak',
-      email: 'igor.yermak@yahoo.com',
+      email: 'igor.yermak@gmail.com',
       github: 'https://github.com/didacta',
       linkedin: 'https://www.linkedin.com/in/igoryermak/',
       picture: 'igor-yermak.jpg',
