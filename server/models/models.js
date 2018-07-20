@@ -65,7 +65,6 @@ const messagesFeed = () => {
     });
   });
 };
-acti
 module.exports = {
   sendSMS,
   stripeAuth,
